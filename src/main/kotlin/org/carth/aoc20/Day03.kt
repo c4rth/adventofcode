@@ -5,19 +5,19 @@ import org.carth.common.Puzzle
 import org.carth.common.extensions.get
 
 
-class Day03(input: String) : Puzzle<String, String>() {
+class Day03(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
-    override fun solvePartOne(): String {
-        return solve(Point(3, 1)).toString()
+    override fun solvePartOne(): Int {
+        return solve(Point(3, 1))
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val slopes = listOf(Point(1, 1), Point(3, 1), Point(5, 1), Point(7, 1), Point(1, 2))
         return slopes.map { slope ->
             solve(slope)
-        }.reduce { acc, i -> acc * i }.toString()
+        }.reduce { acc, i -> acc * i }
     }
 
     private fun solve(slope: Point): Int {

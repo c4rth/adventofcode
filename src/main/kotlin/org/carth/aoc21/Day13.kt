@@ -5,7 +5,7 @@ import java.lang.Integer.max
 
 typealias Grid = Array<BooleanArray>
 
-class Day13(input: String) : Puzzle<String, String>() {
+class Day13(input: String) : Puzzle<Int, Int>() {
     private val data = input.lines()
 
     private fun readGridAndFolding(): Pair<Grid, List<Pair<String, Int>>> {
@@ -64,7 +64,7 @@ class Day13(input: String) : Puzzle<String, String>() {
         }.toString()
     }
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         var (grid, folding) = readGridAndFolding()
         folding.first().also { (axis, _) ->
             grid = if (axis == "x") {
@@ -73,10 +73,10 @@ class Day13(input: String) : Puzzle<String, String>() {
                 grid.foldOnY()
             }
         }
-        return grid.sumOf { line -> line.count { it } }.toString()
+        return grid.sumOf { line -> line.count { it } }
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         var (grid, folding) = readGridAndFolding()
         folding.forEach { (axis, _) ->
             grid = if (axis == "x") {
@@ -86,6 +86,6 @@ class Day13(input: String) : Puzzle<String, String>() {
             }
         }
         println(grid.dump())
-        return "0"
+        return 0
     }
 }

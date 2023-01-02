@@ -4,7 +4,7 @@ import org.carth.common.Puzzle
 import java.lang.Integer.max
 import kotlin.math.abs
 
-class Day17(input: String) : Puzzle<String, String>() {
+class Day17(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
@@ -15,16 +15,16 @@ class Day17(input: String) : Puzzle<String, String>() {
             .toList()
             .map { it.toInt() }
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val (fromX, toX, fromY, toY) = readData(data.first())
         val (maxHeight, _) = solve(fromX, toX, fromY, toY)
-        return maxHeight.toString()
+        return maxHeight
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val (fromX, toX, fromY, toY) = readData(data.first())
         val (_, number) = solve(fromX, toX, fromY, toY)
-        return number.toString()
+        return number
     }
 
     private fun solve(fromX: Int, toX: Int, fromY: Int, toY: Int): Pair<Int, Int> {

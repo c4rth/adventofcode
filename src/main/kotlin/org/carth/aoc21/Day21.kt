@@ -5,7 +5,7 @@ import java.lang.Long.max
 import java.lang.Long.min
 
 
-class Day21(input: String) : Puzzle<String, String>() {
+class Day21(input: String) : Puzzle<Long, Long>() {
 
     private val data = input.lines()
 
@@ -20,7 +20,7 @@ class Day21(input: String) : Puzzle<String, String>() {
             .component2()
             .toInt()
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Long {
         val player1 = Player(readPosition(data[0]))
         val player2 = Player(readPosition(data[1]))
         val dice = Dice()
@@ -31,16 +31,16 @@ class Day21(input: String) : Puzzle<String, String>() {
             if (player2.score >= 1000) break
 
         }
-        return (dice.rolled() * min(player1.score, player2.score)).toString()
+        return (dice.rolled() * min(player1.score, player2.score))
     }
 
     // Not my solution
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Long {
         val position1 = readPosition(data[0])
         val position2 = readPosition(data[1])
         val cache = HashMap<Int, Pair<Long, Long>>().withDefault { 0L to 0L }
         val (winPlayer1, winPlayer2) = solve(cache, position1, 0, position2, 0)
-        return max(winPlayer1, winPlayer2).toString()
+        return max(winPlayer1, winPlayer2)
     }
 
 

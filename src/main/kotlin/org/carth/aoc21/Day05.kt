@@ -8,7 +8,7 @@ import org.jetbrains.kotlinx.multik.ndarray.data.set
 import org.jetbrains.kotlinx.multik.ndarray.operations.filter
 import java.lang.Integer.max
 
-class Day05(input: String) : Puzzle<String, String>() {
+class Day05(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
@@ -26,7 +26,7 @@ class Day05(input: String) : Puzzle<String, String>() {
         return Pair(list, gridSize + 1)
     }
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val (lines, gridSize) = getLines()
         val grid = mk.zeros<Int>(gridSize, gridSize)
         lines.forEach { l ->
@@ -43,10 +43,10 @@ class Day05(input: String) : Puzzle<String, String>() {
             }
         }
         val total = grid.filter { it > 1 }.size
-        return total.toString()
+        return total
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val (lines, gridSize) = getLines()
         val grid = mk.zeros<Int>(gridSize, gridSize)
         lines.forEach { l ->
@@ -72,6 +72,6 @@ class Day05(input: String) : Puzzle<String, String>() {
             }
         }
         val total = grid.filter { it > 1 }.size
-        return total.toString()
+        return total
     }
 }

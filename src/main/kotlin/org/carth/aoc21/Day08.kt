@@ -2,7 +2,7 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day08(input: String) : Puzzle<String, String>() {
+class Day08(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
@@ -11,7 +11,7 @@ class Day08(input: String) : Puzzle<String, String>() {
         return Pair(values[0], values[1])
     }
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         var total = 0
         data.forEach { line ->
             val (_, output) = splitIntputOutput(line)
@@ -22,7 +22,7 @@ class Day08(input: String) : Puzzle<String, String>() {
             subTotal += output.filter { it.length == 7 }.size // 8
             total += subTotal
         }
-        return total.toString()
+        return total
     }
 
     //     0(6)    1(2)    2(5)    3(5)    4(4)     5(5)    6(6)    7(3)    8(7)    9(6)
@@ -64,7 +64,7 @@ class Day08(input: String) : Puzzle<String, String>() {
         return numbers
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         var total = 0
         data.forEach { line ->
             val (input, output) = splitIntputOutput(line)
@@ -75,7 +75,7 @@ class Day08(input: String) : Puzzle<String, String>() {
             }
             total += sb.toString().toInt()
         }
-        return total.toString()
+        return total
     }
 
     private fun String.sortChar(): String = String(this.toCharArray().apply { sort() })

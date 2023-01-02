@@ -2,7 +2,7 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day06(input: String) : Puzzle<String, String>() {
+class Day06(input: String) : Puzzle<Long, Long>() {
 
     private val data = input.lines()
 
@@ -22,19 +22,19 @@ class Day06(input: String) : Puzzle<String, String>() {
         return lifes
     }
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Long {
         val lifes = initLifes()
         for (day in 1..80) {
             process(lifes)
         }
-        return lifes.sum().toString()
+        return lifes.sum()
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Long {
         val lifes = initLifes()
         for (day in 1..256) {
             process(lifes)
         }
-        return lifes.sum().toString()
+        return lifes.sum()
     }
 }

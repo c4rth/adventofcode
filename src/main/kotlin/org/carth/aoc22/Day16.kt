@@ -4,7 +4,7 @@ import org.carth.common.Puzzle
 import kotlin.math.max
 
 
-class Day16(input: String) : Puzzle<String, String>() {
+class Day16(input: String) : Puzzle<Int, Int>() {
 
     private val map: Map<String, Cave> =
         input.lines().map {
@@ -23,11 +23,11 @@ class Day16(input: String) : Puzzle<String, String>() {
         reducedMap.forEach { (_, cave) -> cave.reduceTunnel(map, reducedMap.size - 1) }
     }
 
-    override fun solvePartOne(): String {
-        return bestPath(30, false).pressure.toString()
+    override fun solvePartOne(): Int {
+        return bestPath(30, false).pressure
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val reducedList = reducedMap.map { it.value }
         val elephantMap = mutableMapOf<String, Boolean>()
         var bestTotal = 0
@@ -49,7 +49,7 @@ class Day16(input: String) : Puzzle<String, String>() {
             val bestElephantPath = bestPath(26, true)
             bestTotal = max(bestTotal, bestHumanPath.pressure + bestElephantPath.pressure)
         }
-        return bestTotal.toString()
+        return bestTotal
     }
 
     private fun bestPath(time: Int, elephant: Boolean): Path {

@@ -2,11 +2,11 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day10(input: String) : Puzzle<String, String>() {
+class Day10(input: String) : Puzzle<Int, Long>() {
     private val data = input.lines()
     private val brackets = mapOf('(' to ')', '[' to ']', '{' to '}', '<' to '>')
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val values = mapOf(')' to 3, ']' to 57, '}' to 1197, '>' to 25137)
         var total = 0
         val stack = ArrayDeque<Char>()
@@ -24,10 +24,10 @@ class Day10(input: String) : Puzzle<String, String>() {
                 }
             }
         }
-        return total.toString()
+        return total
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Long {
         val values = mapOf('(' to 1, '[' to 2, '{' to 3, '<' to 4)
         val answers = mutableListOf<Long>()
         val stack = ArrayDeque<Char>()
@@ -54,6 +54,6 @@ class Day10(input: String) : Puzzle<String, String>() {
             }
         }
         answers.sort()
-        return answers[(answers.size - 1) / 2].toString()
+        return answers[(answers.size - 1) / 2]
     }
 }

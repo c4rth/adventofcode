@@ -3,11 +3,11 @@ package org.carth.aoc22
 import org.carth.common.Puzzle
 
 
-class Day20(input: String) : Puzzle<String, String>() {
+class Day20(input: String) : Puzzle<Long, Long>() {
     private val data = input.lines()
-    override fun solvePartOne(): String = solve(1, 1).toString()
+    override fun solvePartOne() = solve(1, 1)
 
-    override fun solvePartTwo(): String = solve(811589153L, 10).toString()
+    override fun solvePartTwo() = solve(811589153L, 10)
 
     private fun solve(key: Long, times: Int): Long {
         val encrypted = data.withIndex().map { IndexedValue(it.index, it.value.toLong() * key) }.toMutableList()

@@ -2,22 +2,20 @@ package org.carth.aoc22
 
 import org.carth.common.Puzzle
 
-class Day07(input: String) : Puzzle<String, String>() {
+class Day07(input: String) : Puzzle<Int, Int>() {
     private val data = input.lines()
 
     private val directories = parseTerminal()
 
-    override fun solvePartOne(): String =
+    override fun solvePartOne(): Int =
         directories.filter { dir -> dir.size <= 100_000 }
             .sumOf { dir -> dir.size }
-            .toString()
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val freeSpace = 70_000_000 - directories.first { dir -> dir.parent == null }.size
         val freeSpaceNeeded = 30_000_000 - freeSpace
         return directories.filter { dir -> dir.size > freeSpaceNeeded }
             .minOf { dir -> dir.size }
-            .toString()
     }
 
     private fun parseTerminal(): List<Node> {

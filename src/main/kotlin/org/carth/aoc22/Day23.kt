@@ -4,27 +4,27 @@ import org.carth.common.Point
 import org.carth.common.Puzzle
 
 
-class Day23(input: String) : Puzzle<String, String>() {
+class Day23(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
     private val elves = parse()
 
     private var directions = mutableListOf(Direction.N, Direction.S, Direction.W, Direction.E)
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         repeat(10) {
             run()
         }
-        return compArea().toString()
+        return compArea()
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         var count = 0
         do {
             val moves = run()
             count++
         } while (moves.isNotEmpty())
-        return count.toString()
+        return count
     }
 
     private fun run(): MutableMap<Point, MutableList<Point>> {

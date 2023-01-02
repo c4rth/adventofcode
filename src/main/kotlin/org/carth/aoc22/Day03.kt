@@ -2,11 +2,11 @@ package org.carth.aoc22
 
 import org.carth.common.Puzzle
 
-class Day03(input: String) : Puzzle<String, String>() {
+class Day03(input: String) : Puzzle<Int, Int>() {
 
     private val sacks = input.lines().map { line -> Rucksack(line) }
 
-    override fun solvePartOne() = sacks.sumOf { priority(it.findMistake()) }.toString()
+    override fun solvePartOne() = sacks.sumOf { priority(it.findMistake()) }
 
     override fun solvePartTwo() =
         sacks.chunked(3)
@@ -14,7 +14,6 @@ class Day03(input: String) : Puzzle<String, String>() {
                 group[0].findBadge(group[1], group[2])
             }
             .sumOf { c -> priority(c) }
-            .toString()
 
     private fun priority(c: Char) = if (c <= 'Z') c.code - 38 else c.code - 96
 

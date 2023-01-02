@@ -2,9 +2,9 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day11(input: String) : Puzzle<String, String>() {
+class Day11(input: String) : Puzzle<Int, Int>() {
     private val data = input.lines()
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val grid = Grid(data)
         var total = 0
         var toExplode: ArrayDeque<Coord>
@@ -16,10 +16,10 @@ class Day11(input: String) : Puzzle<String, String>() {
                 toExplode += grid.explodeAround(coord)
             }
         }
-        return total.toString()
+        return total
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val grid = Grid(data)
         var toExplode: ArrayDeque<Coord>
         var index = 0
@@ -30,7 +30,7 @@ class Day11(input: String) : Puzzle<String, String>() {
                 val coord = toExplode.removeFirst()
                 toExplode += grid.explodeAround(coord)
             }
-            if (grid.isSynchro()) return index.toString()
+            if (grid.isSynchro()) return index
         }
     }
 

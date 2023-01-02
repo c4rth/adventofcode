@@ -2,7 +2,7 @@ package org.carth.aoc22
 
 import org.carth.common.Puzzle
 
-class Day13(data: String) : Puzzle<String, String>() {
+class Day13(data: String) : Puzzle<Int, Int>() {
 
     private val packets = data.split(System.lineSeparator() + System.lineSeparator())
         .map { lines ->
@@ -10,16 +10,16 @@ class Day13(data: String) : Puzzle<String, String>() {
                 .map { line -> Packet.parse(line) }
         }
 
-    override fun solvePartOne(): String =
+    override fun solvePartOne(): Int =
         packets.mapIndexed { index, packets ->
             if (packets[0] < packets[1]) index + 1 else 0
-        }.sum().toString()
+        }.sum()
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val packet1 = Packet.parse("[[2]]")
         val packet2 = Packet.parse("[[6]]")
         val allPackets = (packets.flatten().toMutableList() + listOf(packet1, packet2)).sorted()
-        return ((allPackets.indexOf(packet1) + 1) * (allPackets.indexOf(packet2) + 1)).toString()
+        return ((allPackets.indexOf(packet1) + 1) * (allPackets.indexOf(packet2) + 1))
     }
 
     sealed class Packet : Comparable<Packet> {

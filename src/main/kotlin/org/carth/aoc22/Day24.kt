@@ -4,18 +4,18 @@ import org.carth.common.Point
 import org.carth.common.Puzzle
 import kotlin.math.min
 
-class Day24(input: String) : Puzzle<String, String>() {
+class Day24(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val map = PuzzleMap.parse(data)
         val start = map.start
         val end = map.end
-        return map.getPathTime(start, end).first.toString()
+        return map.getPathTime(start, end).first
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         var map = PuzzleMap.parse(data)
         val start = map.start
         val end = map.end
@@ -33,7 +33,7 @@ class Day24(input: String) : Puzzle<String, String>() {
             total += time
             map = newMap
         }
-        return total.toString()
+        return total
     }
 
     class PuzzleMap {

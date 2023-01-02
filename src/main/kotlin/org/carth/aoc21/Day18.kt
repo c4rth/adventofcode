@@ -5,20 +5,20 @@ import java.lang.Integer.max
 import kotlin.math.ceil
 import kotlin.math.floor
 
-class Day18(input: String) : Puzzle<String, String>() {
+class Day18(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         var node = parse(data.first())
         data.drop(1).forEach { line ->
             node = node.add(parse(line))
             node.reduce()
         }
-        return node.magnitude().toString()
+        return node.magnitude()
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         var max = 0
         for (i in data.indices) {
             for (j in data.indices) {
@@ -27,7 +27,7 @@ class Day18(input: String) : Puzzle<String, String>() {
                 }
             }
         }
-        return max.toString()
+        return max
     }
 
     private fun getCommaIndex(str: String): Int {

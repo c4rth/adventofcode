@@ -7,16 +7,16 @@ class Day10Tests : DayTests<Day10>(Day10::class) {
 
     @Test
     @Order(1)
-    fun solvePartOneSample() = solve(Part.ONE, Type.TEST, expected = "13140")
+    fun solvePartOneSample() = solve(Part.ONE, Type.TEST, expected = 13140)
 
     @Test
     @Order(2)
-    fun solvePartOne() = solve(Part.ONE, Type.INPUT, expected = "17940")
+    fun solvePartOne() = solve(Part.ONE, Type.INPUT, expected = 17940)
 
     @Test
     @Order(3)
     fun solvePartTwoSample() {
-        val expected = """            
+        val expected = """
             ##..##..##..##..##..##..##..##..##..##..
             ###...###...###...###...###...###...###.
             ####....####....####....####....####....

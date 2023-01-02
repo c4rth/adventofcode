@@ -2,24 +2,23 @@ package org.carth.aoc20
 
 import org.carth.common.Puzzle
 
-class Day05(input: String) : Puzzle<String, String>() {
+class Day05(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         return data.maxOf { line ->
             mapSeatId(line)
-        }.toString()
+        }
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         return (data.map { line ->
             mapSeatId(line)
         }.sorted()
             .zipWithNext()
             .first { it.second - it.first != 1 }
             .first + 1)
-            .toString()
     }
 
     private fun mapSeatId(line: String): Int {

@@ -5,13 +5,13 @@ import org.carth.common.Puzzle
 
 typealias State = Pair<Day22.Direction, Point>
 
-class Day22(input: String) : Puzzle<String, String>() {
+class Day22(input: String) : Puzzle<Int, Int>() {
     private val data = input.lines()
     private val board = data.dropLast(2)
     private val perimeter = getPerimeter(board)
     private val moves = data.last().split(Regex("(?<=[RL])|(?=[RL])"))
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val adjacencyMap = mutableMapOf<State, State>()
         for ((dir, pos) in perimeter) {
             val direction = dir.turnLeft()
@@ -24,10 +24,10 @@ class Day22(input: String) : Puzzle<String, String>() {
             }
             adjacencyMap[direction to pos] = direction to Point(x, y)
         }
-        return solve(adjacencyMap).toString()
+        return solve(adjacencyMap)
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val sideLength = data[0].length / 3
         val adjacencyMap = mutableMapOf<State, State>()
         val edges = perimeter.chunked(sideLength).map { it[0].first to it }.toMutableList()
@@ -53,7 +53,7 @@ class Day22(input: String) : Puzzle<String, String>() {
                 }
             }
         }
-        return solve(adjacencyMap).toString()
+        return solve(adjacencyMap)
     }
 
     fun solve(adjacencyMap: Map<State, State>): Int {

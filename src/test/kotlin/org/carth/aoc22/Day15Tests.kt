@@ -10,7 +10,7 @@ class Day15Tests : DayTests<Day15>(Day15::class) {
     @Order(1)
     fun solvePartOneSample() {
         val answer = Day15(readInput(Type.TEST)).solvePartOne(10)
-        assertEquals("26", answer)
+        assertEquals(26, answer)
     }
 
 
@@ -18,21 +18,21 @@ class Day15Tests : DayTests<Day15>(Day15::class) {
     @Order(2)
     fun solvePartOne() {
         val answer = Day15(readInput(Type.INPUT)).solvePartOne(2_000_000)
-        assertEquals("4876693", answer)
+        assertEquals(4876693, answer)
     }
 
     @Test
     @Order(3)
     fun solvePartTwoSample() {
         val answer = Day15(readInput(Type.TEST)).solvePartTwo(40)
-        assertEquals("56000011", answer)
+        assertEquals(56000011, answer)
     }
 
     @Test
     @Order(4)
     fun solvePartTwo() {
         val answer = Day15(readInput(Type.INPUT)).solvePartTwo(4_000_000)
-        assertEquals("11645454855041", answer)
+        assertEquals(11645454855041, answer)
     }
 
 }

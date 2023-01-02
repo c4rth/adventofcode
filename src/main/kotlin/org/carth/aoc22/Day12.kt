@@ -6,18 +6,18 @@ import org.jgrapht.alg.shortestpath.DijkstraShortestPath
 import org.jgrapht.graph.DefaultDirectedGraph
 import org.jgrapht.graph.DefaultEdge
 
-class Day12(input: String) : Puzzle<String, String>() {
+class Day12(input: String) : Puzzle<Int, Int>() {
     private val data = input.lines()
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val (start, end) = getStartEnd()
         val graph = parseGraph()
 
         val dijkstraShortestPath = DijkstraShortestPath(graph)
         val shortestPath = dijkstraShortestPath.getPath(start, end)
-        return shortestPath.edgeList.size.toString()
+        return shortestPath.edgeList.size
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val (_, end) = getStartEnd()
         val graph = parseGraph()
 
@@ -33,7 +33,7 @@ class Day12(input: String) : Puzzle<String, String>() {
                 }
             }
         }
-        return paths.min().toString()
+        return paths.min()
     }
 
     private fun getStartEnd(): Pair<Point, Point> {

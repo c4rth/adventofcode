@@ -11,7 +11,7 @@ import kotlin.reflect.full.primaryConstructor
 
 @ExtendWith(TimingExtension::class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-abstract class DayTests<T : Puzzle<String, String>>(private val clazz: KClass<T>) {
+abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
 
     enum class Type {
         TEST, INPUT
@@ -36,7 +36,7 @@ abstract class DayTests<T : Puzzle<String, String>>(private val clazz: KClass<T>
 
     private fun getInstance(data: String): T = clazz.primaryConstructor!!.call(data)
 
-    fun solve(part: Part, type: Type, suffix: String = "", expected: String) {
+    fun solve(part: Part, type: Type, suffix: String = "", expected: Any) {
         val input = readInput(type, suffix)
         val answer = if (part == Part.ONE) getInstance(input).solvePartOne() else getInstance(input).solvePartTwo()
         Assertions.assertEquals(expected, answer)

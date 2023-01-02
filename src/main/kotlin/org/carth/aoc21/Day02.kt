@@ -2,13 +2,13 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day02(input: String) : Puzzle<String, String>() {
+class Day02(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
     private fun getCommandDelta(line: String) = line.split(" ").let { it[0] to it[1].toInt() }
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         var horizontal = 0
         var depth = 0
         data.forEach {
@@ -19,10 +19,10 @@ class Day02(input: String) : Puzzle<String, String>() {
                 "up" -> depth -= delta
             }
         }
-        return (horizontal * depth).toString()
+        return (horizontal * depth)
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         var horizontal = 0
         var depth = 0
         var aim = 0
@@ -38,6 +38,6 @@ class Day02(input: String) : Puzzle<String, String>() {
                 "up" -> aim -= delta
             }
         }
-        return (horizontal * depth).toString()
+        return (horizontal * depth)
     }
 }

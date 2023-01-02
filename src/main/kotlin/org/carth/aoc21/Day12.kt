@@ -2,20 +2,20 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day12(input: String) : Puzzle<String, String>() {
+class Day12(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val edges = readEdges()
         val paths = getPaths(mutableListOf("start"), edges, false)
-        return paths.size.toString()
+        return paths.size
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val edges = readEdges()
         val paths = getPaths(mutableListOf("start"), edges, true)
-        return paths.size.toString()
+        return paths.size
 
     }
 

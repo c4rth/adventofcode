@@ -2,7 +2,7 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day09(input: String) : Puzzle<String, String>() {
+class Day09(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
     private val lSize = data.size + 2
@@ -16,7 +16,7 @@ class Day09(input: String) : Puzzle<String, String>() {
         return grid
     }
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val grid = getGrid()
         var lows = 0
         for (l in 1 until lSize) {
@@ -26,7 +26,7 @@ class Day09(input: String) : Puzzle<String, String>() {
                 }
             }
         }
-        return lows.toString()
+        return lows
     }
 
     private fun isSmaller(grid: List<IntArray>, l: Int, c: Int): Boolean {
@@ -54,7 +54,7 @@ class Day09(input: String) : Puzzle<String, String>() {
         return checked.size
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val grid = getGrid()
         val basins = mutableListOf<Int>()
         for (l in 1 until lSize) {
@@ -64,7 +64,7 @@ class Day09(input: String) : Puzzle<String, String>() {
                 }
             }
         }
-        return basins.sortedDescending().take(3).reduce { total, item -> total * item }.toString()
+        return basins.sortedDescending().take(3).reduce { total, item -> total * item }
     }
 
     data class Coord(val l: Int, val c: Int)

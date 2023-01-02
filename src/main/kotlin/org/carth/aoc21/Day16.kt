@@ -2,19 +2,15 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day16(input: String) : Puzzle<String, String>() {
+class Day16(input: String) : Puzzle<Int, Long>() {
 
     private val binary =
         input.map { c -> Integer.parseInt(c.toString(), 16).toString(2).padStart(4, '0') }.joinToString("")
     private val packets = parse(Bits(binary))
 
-    override fun solvePartOne(): String {
-        return packets.sumOfVersion().toString()
-    }
+    override fun solvePartOne() = packets.sumOfVersion()
 
-    override fun solvePartTwo(): String {
-        return packets.value().toString()
-    }
+    override fun solvePartTwo() = packets.value()
 
     private fun parse(bits: Bits, packet: Packet? = null): Packet {
         val version = bits.readInt(3)

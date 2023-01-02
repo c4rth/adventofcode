@@ -4,19 +4,19 @@ import org.carth.common.Puzzle
 import kotlin.math.max
 import kotlin.math.min
 
-class Day22(input: String) : Puzzle<String, String>() {
+class Day22(input: String) : Puzzle<Long, Long>() {
 
     private val data = input.lines()
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Long {
         val limit = Cube(Point3d(-50, -50, -50), Point3d(50, 50, 50))
         val steps = parseData(data).filter { it.cube.intersect(limit) != null }
-        return markAllCubes(steps).toString()
+        return markAllCubes(steps)
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Long {
         val steps = parseData(data)
-        return markAllCubes(steps).toString()
+        return markAllCubes(steps)
     }
 
     private fun parseData(input: List<String>): List<Step> {

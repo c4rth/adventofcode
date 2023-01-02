@@ -3,7 +3,7 @@ package org.carth.aoc21
 import org.carth.common.Puzzle
 import kotlin.math.abs
 
-class Day07(input: String) : Puzzle<String, String>() {
+class Day07(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
@@ -29,16 +29,16 @@ class Day07(input: String) : Puzzle<String, String>() {
         return minFuel
     }
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         return calcMinFuel { x, position ->
             abs(x - position)
-        }.toString()
+        }
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         return calcMinFuel { x, position ->
             val delta = abs(x - position)
             (delta * delta + delta) / 2
-        }.toString()
+        }
     }
 }

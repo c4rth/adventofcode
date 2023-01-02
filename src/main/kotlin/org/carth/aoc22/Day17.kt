@@ -5,7 +5,7 @@ import org.carth.common.Puzzle
 import kotlin.math.absoluteValue
 
 // https://github.com/tginsberg/advent-2022-kotlin/blob/main/src/main/kotlin/com/ginsberg/advent2022/Day17.kt
-class Day17(data: String) : Puzzle<String, String>() {
+class Day17(data: String) : Puzzle<Long, Long>() {
 
     private val jets: List<Point> = parseJets(data)
     private val shapes: List<Set<Point>> = generateShapes()
@@ -15,15 +15,15 @@ class Day17(data: String) : Puzzle<String, String>() {
     private var jetCounter: Int = 0
     private var blockCounter: Int = 0
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Long {
         repeat(2022) {
             simulate()
         }
-        return cave.height().toLong().toString()
+        return cave.height().toLong()
     }
 
-    override fun solvePartTwo(): String =
-        calculateHeight(1000000000000L - 1).toString()
+    override fun solvePartTwo(): Long =
+        calculateHeight(1000000000000L - 1)
 
 
     private fun simulate() {

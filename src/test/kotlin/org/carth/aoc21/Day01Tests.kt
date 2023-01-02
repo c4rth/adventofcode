@@ -7,18 +7,18 @@ import org.junit.jupiter.api.*
 class Day01Tests : DayTests<Day01>(Day01::class) {
     @Test
     @Order(1)
-    fun solvePartOneSample() = solve(Part.ONE, Type.TEST, expected = "7")
+    fun solvePartOneSample() = solve(Part.ONE, Type.TEST, expected = 7)
 
     @Test
     @Order(2)
-    fun solvePartOne() = solve(Part.ONE, Type.INPUT, expected = "1564")
+    fun solvePartOne() = solve(Part.ONE, Type.INPUT, expected = 1564)
 
     @Test
     @Order(3)
-    fun solvePartTwoSample() = solve(Part.TWO, Type.TEST, expected = "5")
+    fun solvePartTwoSample() = solve(Part.TWO, Type.TEST, expected = 5)
 
     @Test
     @Order(4)
-    fun solvePartTwo() = solve(Part.TWO, Type.INPUT, expected = "1611")
+    fun solvePartTwo() = solve(Part.TWO, Type.INPUT, expected = 1611)
 
 }

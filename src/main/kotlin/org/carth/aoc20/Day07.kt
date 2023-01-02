@@ -2,7 +2,7 @@ package org.carth.aoc20
 
 import org.carth.common.Puzzle
 
-class Day07(input: String) : Puzzle<String, String>() {
+class Day07(input: String) : Puzzle<Int, Int>() {
 
     private val bags = input.lines().associate { line ->
         val split = line.split("contain", ", ", ".").dropLast(1)
@@ -14,9 +14,9 @@ class Day07(input: String) : Puzzle<String, String>() {
         key to cont
     }
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val bag = "shiny gold"
-        return canContainBag(bag).distinct().size.toString()
+        return canContainBag(bag).distinct().size
     }
 
     private fun canContainBag(bag: String): List<String> {
@@ -31,9 +31,9 @@ class Day07(input: String) : Puzzle<String, String>() {
     }
 
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val bag = "shiny gold"
-        return sumBag(bag).toString()
+        return sumBag(bag)
     }
 
     private fun sumBag(bag: String): Int {

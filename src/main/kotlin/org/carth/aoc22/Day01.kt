@@ -2,11 +2,11 @@ package org.carth.aoc22
 
 import org.carth.common.Puzzle
 
-class Day01(private val data: String) : Puzzle<String, String>() {
+class Day01(private val data: String) : Puzzle<Int, Int>() {
 
-    override fun solvePartOne() = getCaloriesList().max().toString()
+    override fun solvePartOne() = getCaloriesList().max()
 
-    override fun solvePartTwo() = getCaloriesList().take(3).sum().toString()
+    override fun solvePartTwo() = getCaloriesList().take(3).sum()
 
     private fun getCaloriesList(): List<Int> {
         return data.split(System.lineSeparator() + System.lineSeparator())

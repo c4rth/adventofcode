@@ -5,17 +5,16 @@ import kotlin.math.abs
 
 // https://github.com/ClouddJR/AdventOfCode2021/blob/master/src/main/kotlin/com/clouddjr/advent2021/Day19.kt
 
-class Day19(input: String) : Puzzle<String, String>() {
+class Day19(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
     private val scanners = parse(data)
 
-    override fun solvePartOne() = assembleMap().beacons.size.toString()
+    override fun solvePartOne() = assembleMap().beacons.size
 
     override fun solvePartTwo() = assembleMap().scannersPositions.let { positions ->
         positions.flatMapIndexed { index, first -> positions.drop(index + 1).map { second -> first to second } }
             .maxOf { (first, second) -> first distanceTo second }
-            .toString()
     }
 
     private fun parse(input: List<String>): List<Scanner> {

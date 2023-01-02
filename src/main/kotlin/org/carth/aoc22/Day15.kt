@@ -6,28 +6,28 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-class Day15(input: String) : Puzzle<String, String>() {
+class Day15(input: String) : Puzzle<Int, Int>() {
     private val data = input.lines()
     private val sensors = parse()
-    override fun solvePartOne(): String = "0"
+    override fun solvePartOne(): Int = 0
 
-    fun solvePartOne(row: Int): String {
+    fun solvePartOne(row: Int): Int {
         val notInRange = findNotInRange(row)
         val uniqueNotInRange = notInRange.flatten().distinct()
         val beaconsInRow = sensors.map { it.second }.filter { it.y == row }.distinct()
-        return (uniqueNotInRange.size - beaconsInRow.size).toString()
+        return (uniqueNotInRange.size - beaconsInRow.size)
     }
 
-    override fun solvePartTwo(): String = "0"
+    override fun solvePartTwo(): Int = 0
 
-    fun solvePartTwo(max: Int): String {
+    fun solvePartTwo(max: Int): Long {
         for (y in 0..max) {
             val x = findOpenSpot(y)
             if (x != -1L) {
-                return (x * 4_000_000 + y).toString()
+                return (x * 4_000_000 + y)
             }
         }
-        return "0"
+        return 0
     }
 
     private fun parse(): List<Triple<Point, Point, Int>> {

@@ -4,15 +4,15 @@ import org.carth.common.Puzzle
 import java.util.*
 
 
-class Day15(input: String) : Puzzle<String, String>() {
+class Day15(input: String) : Puzzle<Int, Int>() {
     private val data = input.lines()
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         val grid = data.map { line -> line.map { it.digitToInt() }.toIntArray() }.toTypedArray()
-        return solve(grid).toString()
+        return solve(grid)
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         val size = data.size
         val grid = Array(size * 5) { IntArray(size * 5) }
         repeat(size * 5) { l ->
@@ -22,7 +22,7 @@ class Day15(input: String) : Puzzle<String, String>() {
                     (data[l % size][c % size].digitToInt() + (ll + c / size)).let { weight -> if (weight < 10) weight else weight - 9 }
             }
         }
-        return solve(grid).toString()
+        return solve(grid)
     }
 
     private fun solve(grid: Array<IntArray>): Int {

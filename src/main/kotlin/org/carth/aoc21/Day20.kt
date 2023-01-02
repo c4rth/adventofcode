@@ -4,13 +4,13 @@ import org.carth.common.Puzzle
 
 typealias Image = Array<IntArray>
 
-class Day20(input: String) : Puzzle<String, String>() {
+class Day20(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.lines()
 
-    override fun solvePartOne(): String = solve(2).toString()
+    override fun solvePartOne(): Int = solve(2)
 
-    override fun solvePartTwo(): String = solve(50).toString()
+    override fun solvePartTwo(): Int = solve(50)
 
     private fun solve(times: Int): Int {
         var (algorithm, image) = parse()

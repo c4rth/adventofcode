@@ -3,21 +3,21 @@ package org.carth.aoc20
 import org.carth.common.Puzzle
 
 
-class Day04(input: String) : Puzzle<String, String>() {
+class Day04(input: String) : Puzzle<Int, Int>() {
 
     private val passports = input.split(System.lineSeparator() + System.lineSeparator())
     private val mandatoryFields = listOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid")
 
-    override fun solvePartOne(): String {
+    override fun solvePartOne(): Int {
         var total = 0
         passports.forEach { passport ->
             val fields = passport.split(" ", ":", System.lineSeparator())
             if (fields.containsAll(mandatoryFields)) total++
         }
-        return total.toString()
+        return total
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         var total = 0
         passports.forEach { passport ->
             val fields = passport.split(" ", ":", System.lineSeparator())
@@ -49,7 +49,7 @@ class Day04(input: String) : Puzzle<String, String>() {
                 if (valids == 7) total++
             }
         }
-        return total.toString()
+        return total
     }
 
 }

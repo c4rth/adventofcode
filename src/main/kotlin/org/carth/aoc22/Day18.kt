@@ -7,7 +7,7 @@ import kotlin.collections.component2
 import kotlin.collections.component3
 
 
-class Day18(input: String) : Puzzle<String, String>() {
+class Day18(input: String) : Puzzle<Int, Int>() {
 
     private val cubes =
         input.lines().map { line ->
@@ -34,13 +34,13 @@ class Day18(input: String) : Puzzle<String, String>() {
         }
     }
 
-    override fun solvePartOne(): String {
-        return cubes.sumOf { cube -> cube.adjacents().count { adjacentCube -> adjacentCube !in cubes } }.toString()
+    override fun solvePartOne(): Int {
+        return cubes.sumOf { cube -> cube.adjacents().count { adjacentCube -> adjacentCube !in cubes } }
     }
 
-    override fun solvePartTwo(): String {
+    override fun solvePartTwo(): Int {
         allPoint3ds.forEach { removeTrapped(it) }
-        return cubes.sumOf { cube -> cube.adjacents().count { it !in cubes && it !in trapped } }.toString()
+        return cubes.sumOf { cube -> cube.adjacents().count { it !in cubes && it !in trapped } }
 
     }
 
