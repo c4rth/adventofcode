@@ -2,16 +2,16 @@ package org.carth.aoc22
 
 import org.carth.common.Puzzle
 
-class Day04(data: List<String>) : Puzzle<Int, Int>() {
+class Day04(input: String) : Puzzle<String, String>() {
 
-    private val ranges = getPairElves(data)
+    private val ranges = getPairElves(input)
 
-    override fun solvePartOne() = ranges.count { (r1, r2) -> r1.includes(r2) || r2.includes(r1) }
+    override fun solvePartOne() = ranges.count { (r1, r2) -> r1.includes(r2) || r2.includes(r1) }.toString()
 
-    override fun solvePartTwo() = ranges.count { (r1, r2) -> r1.isOverlap(r2) }
+    override fun solvePartTwo() = ranges.count { (r1, r2) -> r1.isOverlap(r2) }.toString()
 
-    private fun getPairElves(data: List<String>): List<Pair<Range, Range>> {
-        return data.map { line ->
+    private fun getPairElves(input: String): List<Pair<Range, Range>> {
+        return input.lines().map { line ->
             line.split(",", "-")
                 .map(String::toInt)
         }.map { ints ->

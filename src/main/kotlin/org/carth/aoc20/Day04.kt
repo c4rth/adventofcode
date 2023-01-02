@@ -3,21 +3,21 @@ package org.carth.aoc20
 import org.carth.common.Puzzle
 
 
-class Day04(private val data: String) : Puzzle<Int, Int>() {
+class Day04(input: String) : Puzzle<String, String>() {
 
-    private val passports = data.split(System.lineSeparator() + System.lineSeparator())
+    private val passports = input.split(System.lineSeparator() + System.lineSeparator())
     private val mandatoryFields = listOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid")
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         var total = 0
         passports.forEach { passport ->
             val fields = passport.split(" ", ":", System.lineSeparator())
             if (fields.containsAll(mandatoryFields)) total++
         }
-        return total
+        return total.toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         var total = 0
         passports.forEach { passport ->
             val fields = passport.split(" ", ":", System.lineSeparator())
@@ -38,6 +38,7 @@ class Day04(private val data: String) : Puzzle<Int, Int>() {
                                 false
                             }
                         }
+
                         "hcl" -> "#(?:[0-9a-f]{2}){3}".toRegex().matches(value[1])
                         "ecl" -> value[1] in listOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
                         "pid" -> value[1].length == 9 && value[1].toIntOrNull() != null
@@ -48,7 +49,7 @@ class Day04(private val data: String) : Puzzle<Int, Int>() {
                 if (valids == 7) total++
             }
         }
-        return total
+        return total.toString()
     }
 
 }

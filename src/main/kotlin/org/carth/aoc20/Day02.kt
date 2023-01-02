@@ -2,9 +2,9 @@ package org.carth.aoc20
 
 import org.carth.common.Puzzle
 
-class Day02(data: List<String>) : Puzzle<Int, Int>() {
+class Day02(input: String) : Puzzle<String, String>() {
 
-    private val passwords = data.map { line ->
+    private val passwords = input.lines().map { line ->
         val sp = line.split(" ")
         val range = sp[0].split("-").map { it.toInt() }
         val letter = sp[1][0]
@@ -12,21 +12,21 @@ class Day02(data: List<String>) : Puzzle<Int, Int>() {
         Triple(letter, IntRange(range[0], range[1]), pass)
     }
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         var total = 0
         passwords.forEach { (letter, range, pass) ->
             val count = pass.count { c -> c == letter }
             if (count in range) total += 1
         }
-        return total
+        return total.toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         var total = 0
         passwords.forEach { (letter, range, pass) ->
             if (pass[range.first - 1] == letter && pass[range.last - 1] != letter) total += 1
             if (pass[range.first - 1] != letter && pass[range.last - 1] == letter) total += 1
         }
-        return total
+        return total.toString()
     }
 }

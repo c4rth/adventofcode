@@ -1,66 +1,43 @@
 package org.carth.aoc22
 
-import mu.KotlinLogging
 import org.carth.common.DayTests
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.Assertions.assertEquals
 
-class Day10Tests : DayTests() {
+class Day10Tests : DayTests<Day10>(Day10::class) {
 
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day10PartOneTest {
+    @Test
+    @Order(1)
+    fun solvePartOneSample() = solve(Part.ONE, Type.TEST, expected = "13140")
 
-        @Test
-        @Order(1)
-        fun `solve part one of sample`() {
-            // Act
-            val answer = Day10(testInputAsListOfString()).solvePartOne()
+    @Test
+    @Order(2)
+    fun solvePartOne() = solve(Part.ONE, Type.INPUT, expected = "17940")
 
-            // Assert
-            assertEquals(13_140, answer)
-        }
-
-        @Test
-        @Order(2)
-        fun `solve part one`() {
-            // Act
-            val answer = Day10(inputAsListOfString()).solvePartOne()
-
-            // Assert
-            assertEquals(17_940, answer)
-        }
+    @Test
+    @Order(3)
+    fun solvePartTwoSample() {
+        val expected = """            
+            ##..##..##..##..##..##..##..##..##..##..
+            ###...###...###...###...###...###...###.
+            ####....####....####....####....####....
+            #####.....#####.....#####.....#####.....
+            ######......######......######......####
+            #######.......#######.......#######.....
+        """.trimIndent()
+        solve(Part.TWO, Type.TEST, expected = expected)
     }
 
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day10PartTwoTest {
-
-        private val logger = KotlinLogging.logger {}
-
-        @Test
-        @Order(1)
-        fun `solve part two of sample`() {
-            // Act
-            val answer = Day10(testInputAsListOfString()).solvePartTwo()
-
-            val expected = "##..##..##..##..##..##..##..##..##..##..\n" +
-                    "###...###...###...###...###...###...###.\n" +
-                    "####....####....####....####....####....\n" +
-                    "#####.....#####.....#####.....#####.....\n" +
-                    "######......######......######......####\n" +
-                    "#######.......#######.......#######....."
-            // Assert
-            assertEquals(expected, answer)
-        }
-
-        @Test
-        @Order(2)
-        fun `solve part two`() {
-            // Act
-            val answer = Day10(inputAsListOfString()).solvePartTwo()
-            logger.info { "\n" + answer }
-            // ZCBAJFJZ
-        }
+    @Test
+    @Order(4)
+    fun solvePartTwo() {
+        val expected = """            
+            ####..##..###...##....##.####...##.####.
+            ...#.#..#.#..#.#..#....#.#.......#....#.
+            ..#..#....###..#..#....#.###.....#...#..
+            .#...#....#..#.####....#.#.......#..#...
+            #....#..#.#..#.#..#.#..#.#....#..#.#....
+            ####..##..###..#..#..##..#.....##..####.
+        """.trimIndent()
+        solve(Part.TWO, Type.INPUT, expected = expected)
     }
 }

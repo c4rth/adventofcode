@@ -5,18 +5,20 @@ import java.lang.Integer.max
 import kotlin.math.ceil
 import kotlin.math.floor
 
-class Day18(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day18(input: String) : Puzzle<String, String>() {
 
-    override fun solvePartOne(): Int {
+    private val data = input.lines()
+
+    override fun solvePartOne(): String {
         var node = parse(data.first())
         data.drop(1).forEach { line ->
             node = node.add(parse(line))
             node.reduce()
         }
-        return node.magnitude()
+        return node.magnitude().toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         var max = 0
         for (i in data.indices) {
             for (j in data.indices) {
@@ -25,7 +27,7 @@ class Day18(private val data: List<String>) : Puzzle<Int, Int>() {
                 }
             }
         }
-        return max
+        return max.toString()
     }
 
     private fun getCommaIndex(str: String): Int {
@@ -122,7 +124,8 @@ class Day18(private val data: List<String>) : Puzzle<Int, Int>() {
 
             override fun findToSplit(): Regular? = if (value >= 10) this else null
 
-            fun split() = parent?.replace(this, Paire(Regular(floor(value / 2.0).toInt()), Regular(ceil(value / 2.0).toInt())))
+            fun split() =
+                parent?.replace(this, Paire(Regular(floor(value / 2.0).toInt()), Regular(ceil(value / 2.0).toInt())))
         }
     }
 }

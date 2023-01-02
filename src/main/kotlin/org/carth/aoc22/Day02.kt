@@ -2,9 +2,11 @@ package org.carth.aoc22
 
 import org.carth.common.Puzzle
 
-class Day02(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day02(input: String) : Puzzle<String, String>() {
 
-    override fun solvePartOne(): Int {
+    private val data = input.lines()
+
+    override fun solvePartOne(): String {
         val scores = mapOf(
             "X" to mapOf("A" to 3, "B" to 0, "C" to 6),
             "Y" to mapOf("A" to 6, "B" to 3, "C" to 0),
@@ -15,10 +17,10 @@ class Day02(private val data: List<String>) : Puzzle<Int, Int>() {
         )
         return getRounds().sumOf { round ->
             values[round.player2]!! + scores[round.player2]!![round.player1]!!
-        }
+        }.toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         val values = mapOf(
             "X" to mapOf("A" to 3, "B" to 1, "C" to 2),
             "Y" to mapOf("A" to 1, "B" to 2, "C" to 3),
@@ -29,7 +31,7 @@ class Day02(private val data: List<String>) : Puzzle<Int, Int>() {
         )
         return getRounds().sumOf { round ->
             values[round.player2]!![round.player1]!! + scores[round.player2]!!
-        }
+        }.toString()
     }
 
     private fun getRounds(): List<Round> =

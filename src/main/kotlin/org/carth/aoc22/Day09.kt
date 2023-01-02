@@ -5,11 +5,12 @@ import org.carth.common.Puzzle
 import kotlin.math.abs
 import kotlin.math.sign
 
-class Day09(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day09(input: String) : Puzzle<String, String>() {
+    private val data = input.lines()
 
-    override fun solvePartOne() = solve(2)
+    override fun solvePartOne() = solve(2).toString()
 
-    override fun solvePartTwo() = solve(10)
+    override fun solvePartTwo() = solve(10).toString()
 
     private fun parseCommands(): List<Pair<String, Int>> {
         return data.map { line ->

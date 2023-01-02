@@ -2,24 +2,21 @@ package org.carth.aoc20
 
 import org.carth.common.Puzzle
 
-class Day07(data: List<String>) : Puzzle<Int, Int>() {
+class Day07(input: String) : Puzzle<String, String>() {
 
-    private val bags = data.map { line ->
+    private val bags = input.lines().associate { line ->
         val split = line.split("contain", ", ", ".").dropLast(1)
         val key = split[0].dropLast(6)
         val cont = split.drop(1).map { bag ->
-            val num = if (bag.trim()[0].isDigit())
-                bag.trim()[0] - '0'
-            else
-                0
+            val num = if (bag.trim()[0].isDigit()) bag.trim()[0] - '0' else 0
             num to bag.replace("bags", "").replace("bag", "").drop(2).trim()
         }
         key to cont
-    }.toMap()
+    }
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         val bag = "shiny gold"
-        return canContainBag(bag).distinct().size
+        return canContainBag(bag).distinct().size.toString()
     }
 
     private fun canContainBag(bag: String): List<String> {
@@ -34,9 +31,9 @@ class Day07(data: List<String>) : Puzzle<Int, Int>() {
     }
 
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         val bag = "shiny gold"
-        return sumBag(bag)
+        return sumBag(bag).toString()
     }
 
     private fun sumBag(bag: String): Int {

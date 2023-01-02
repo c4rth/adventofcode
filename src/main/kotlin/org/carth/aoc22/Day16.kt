@@ -4,10 +4,10 @@ import org.carth.common.Puzzle
 import kotlin.math.max
 
 
-class Day16(data: List<String>) : Puzzle<Int, Int>() {
+class Day16(input: String) : Puzzle<String, String>() {
 
     private val map: Map<String, Cave> =
-        data.map {
+        input.lines().map {
             it.split("Valve ", " has flow rate=", "; tunnel").drop(1)
         }.associate { line ->
             val list = if (line[2].startsWith("s")) line[2].drop(17) else line[2].drop(16)
@@ -23,11 +23,11 @@ class Day16(data: List<String>) : Puzzle<Int, Int>() {
         reducedMap.forEach { (_, cave) -> cave.reduceTunnel(map, reducedMap.size - 1) }
     }
 
-    override fun solvePartOne(): Int {
-        return bestPath(30, false).pressure
+    override fun solvePartOne(): String {
+        return bestPath(30, false).pressure.toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         val reducedList = reducedMap.map { it.value }
         val elephantMap = mutableMapOf<String, Boolean>()
         var bestTotal = 0
@@ -38,7 +38,7 @@ class Day16(data: List<String>) : Puzzle<Int, Int>() {
                 elephantMap[cave.name] = ((db and (1 shl index)) != 0)
             }
             reducedList.forEach { cave ->
-                cave.reducedTunnel.forEach {tunnel ->
+                cave.reducedTunnel.forEach { tunnel ->
                     tunnel.elephant = elephantMap[tunnel.caveName]!!
                 }
             }
@@ -49,7 +49,7 @@ class Day16(data: List<String>) : Puzzle<Int, Int>() {
             val bestElephantPath = bestPath(26, true)
             bestTotal = max(bestTotal, bestHumanPath.pressure + bestElephantPath.pressure)
         }
-        return bestTotal
+        return bestTotal.toString()
     }
 
     private fun bestPath(time: Int, elephant: Boolean): Path {

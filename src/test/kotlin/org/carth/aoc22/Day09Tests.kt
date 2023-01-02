@@ -2,66 +2,26 @@ package org.carth.aoc22
 
 import org.carth.common.DayTests
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.Assertions.assertEquals
 
-class Day09Tests : DayTests() {
+class Day09Tests : DayTests<Day09>(Day09::class) {
 
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day09PartOneTest {
+    @Test
+    @Order(1)
+    fun solvePartOneSample() = solve(Part.ONE, Type.TEST, "1", expected = "13")
 
-        @Test
-        @Order(1)
-        fun `solve part one of sample`() {
-            // Act
-            val answer = Day09(testInputAsListOfString( "1")).solvePartOne()
+    @Test
+    @Order(2)
+    fun solvePartOne() = solve(Part.ONE, Type.INPUT, expected = "6026")
 
-            // Assert
-            assertEquals(13, answer)
-        }
+    @Test
+    @Order(3)
+    fun solvePartTwoSample1() = solve(Part.TWO, Type.TEST, "1", expected = "1")
 
-        @Test
-        @Order(2)
-        fun `solve part one`() {
-            // Act
-            val answer = Day09(inputAsListOfString()).solvePartOne()
+    @Test
+    @Order(4)
+    fun solvePartTwoSample2() = solve(Part.TWO, Type.TEST, "2", expected = "36")
 
-            // Assert
-            assertEquals(6026, answer)
-        }
-    }
-
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day09PartTwoTest {
-
-        @Test
-        @Order(1)
-        fun `solve part two of sample 1`() {
-            // Act
-            val answer = Day09(testInputAsListOfString( "1")).solvePartTwo()
-
-            // Assert
-            assertEquals(1, answer)
-        }
-
-        @Test
-        @Order(2)
-        fun `solve part two of sample 2`() {
-            // Act
-            val answer = Day09(testInputAsListOfString( "2")).solvePartTwo()
-
-            // Assert
-            assertEquals(36, answer)
-        }
-
-        @Test
-        @Order(3)
-        fun `solve part two`() {
-            // Act
-            val answer = Day09(inputAsListOfString()).solvePartTwo()
-            // Assert
-            assertEquals(2273, answer)
-        }
-    }
+    @Test
+    @Order(5)
+    fun solvePartTwo() = solve(Part.TWO, Type.INPUT, expected = "2273")
 }

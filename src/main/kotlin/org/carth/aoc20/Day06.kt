@@ -2,17 +2,17 @@ package org.carth.aoc20
 
 import org.carth.common.Puzzle
 
-class Day06(data: String) : Puzzle<Int, Int>() {
+class Day06(input: String) : Puzzle<String, String>() {
 
     private val allAnswers =
-        data.split(System.lineSeparator() + System.lineSeparator()).map { it.split(System.lineSeparator()) }
+        input.split(System.lineSeparator() + System.lineSeparator()).map { it.split(System.lineSeparator()) }
 
-    override fun solvePartOne(): Int {
-        return solve(1)
+    override fun solvePartOne(): String {
+        return solve(1).toString()
     }
 
-    override fun solvePartTwo(): Int {
-        return solve(2)
+    override fun solvePartTwo(): String {
+        return solve(2).toString()
     }
 
     private fun solve(part: Int): Int {

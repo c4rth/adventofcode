@@ -2,14 +2,16 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day04(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day04(input: String) : Puzzle<String, String>() {
+
+    private val data = input.lines()
 
     private fun getGrids(): List<Grid> =
         data.drop(1).chunked(6).map { list ->
             Grid(list.takeLast(5))
         }
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         val draws = data.first().split(",").map { s: String -> s.toInt() }
         val grids = getGrids()
         var winner: Grid? = null
@@ -25,12 +27,12 @@ class Day04(private val data: List<String>) : Puzzle<Int, Int>() {
             }
         }
         if (null != winner) {
-            return draws[indexDraw] * winner.sumOfNonChecked
+            return (draws[indexDraw] * winner.sumOfNonChecked).toString()
         }
-        return 0
+        return "0"
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         val draws = data.first().split(",").map { s: String -> s.toInt() }
         val grids = getGrids()
         var numberOfWinners = 0
@@ -51,11 +53,10 @@ class Day04(private val data: List<String>) : Puzzle<Int, Int>() {
             val lastWinner = grids.first { card ->
                 card.indexWinnerDraw == indexDraw
             }
-            return draws[indexDraw] * lastWinner.sumOfNonChecked
+            return (draws[indexDraw] * lastWinner.sumOfNonChecked).toString()
         }
-        return 0
+        return "0"
     }
-
 
 
     class Grid(gridNumbers: List<String>) {

@@ -2,56 +2,22 @@ package org.carth.aoc22
 
 import org.carth.common.DayTests
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.Assertions.assertEquals
 
-class Day12Tests : DayTests() {
+class Day12Tests : DayTests<Day12>(Day12::class) {
 
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day12PartOneTest {
+    @Test
+    @Order(1)
+    fun solvePartOneSample() = solve(Part.ONE, Type.TEST, expected = "31")
 
-        @Test
-        @Order(1)
-        fun `solve part one of sample`() {
-            // Act
-            val answer = Day12(testInputAsListOfString()).solvePartOne()
+    @Test
+    @Order(2)
+    fun solvePartOne() = solve(Part.ONE, Type.INPUT, expected = "412")
 
-            // Assert
-            assertEquals(31, answer)
-        }
+    @Test
+    @Order(3)
+    fun solvePartTwoSample() = solve(Part.TWO, Type.TEST, expected = "29")
 
-        @Test
-        @Order(2)
-        fun `solve part one`() {
-            // Act
-            val answer = Day12(inputAsListOfString()).solvePartOne()
-
-            // Assert
-            assertEquals(412, answer)
-        }
-    }
-
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day12PartTwoTest {
-
-        @Test
-        @Order(1)
-        fun `solve part two of sample`() {
-            // Act
-            val answer = Day12(testInputAsListOfString()).solvePartTwo()
-
-            // Assert
-            assertEquals(29, answer)
-        }
-
-        @Test
-        @Order(4)
-        fun `solve part two`() {
-            // Act
-            val answer = Day12(inputAsListOfString()).solvePartTwo()
-            // Assert
-            assertEquals(402, answer)
-        }
-    }
+    @Test
+    @Order(4)
+    fun solvePartTwo() = solve(Part.TWO, Type.INPUT, expected = "402")
 }

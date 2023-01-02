@@ -3,56 +3,20 @@ package org.carth.aoc22
 import org.carth.common.DayTests
 import org.junit.jupiter.api.*
 
-class Day01Tests : DayTests() {
+class Day01Tests : DayTests<Day01>(Day01::class) {
+    @Test
+    @Order(1)
+    fun solvePartOneSample() = solve(Part.ONE, Type.TEST, expected = "24000")
 
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day01PartOneTest {
+    @Test
+    @Order(2)
+    fun solvePartOne() = solve(Part.ONE, Type.INPUT, expected = "67633")
 
-        @Test
-        @Order(1)
-        fun `solve part one sample`() {
+    @Test
+    @Order(3)
+    fun solvePartTwoSample() = solve(Part.TWO, Type.TEST, expected = "45000")
 
-            // Act
-            val answer = Day01(testInputAsText()).solvePartOne()
-
-            // Assert
-            Assertions.assertEquals(24_000, answer)
-        }
-
-        @Test
-        @Order(2)
-        fun `solve part one`() {
-            // Act
-            val answer = Day01(inputAsText()).solvePartOne()
-
-            // Assert
-            Assertions.assertEquals(67_633, answer)
-        }
-
-    }
-
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day01PartTwoTest {
-
-        @Test
-        @Order(1)
-        fun `solve part two sample`() {
-            // Act
-            val answer = Day01(testInputAsText()).solvePartTwo()
-
-            // Assert
-            Assertions.assertEquals(45_000, answer)
-        }
-
-        @Test
-        @Order(2)
-        fun `solve part two`() {
-            // Act
-            val answer = Day01(inputAsText()).solvePartTwo()
-            // Assert
-            Assertions.assertEquals(199_628, answer)
-        }
-    }
+    @Test
+    @Order(4)
+    fun solvePartTwo() = solve(Part.TWO, Type.INPUT, expected = "199628")
 }

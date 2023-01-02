@@ -7,10 +7,10 @@ import kotlin.collections.component2
 import kotlin.collections.component3
 
 
-class Day18(data: List<String>) : Puzzle<Int, Int>() {
+class Day18(input: String) : Puzzle<String, String>() {
 
     private val cubes =
-        data.map { line ->
+        input.lines().map { line ->
             line.split(",").map { str ->
                 str.toInt()
             }.let { (x, y, z) ->
@@ -34,13 +34,13 @@ class Day18(data: List<String>) : Puzzle<Int, Int>() {
         }
     }
 
-    override fun solvePartOne(): Int {
-        return cubes.sumOf { cube -> cube.adjacents().count { adjacentCube -> adjacentCube !in cubes } }
+    override fun solvePartOne(): String {
+        return cubes.sumOf { cube -> cube.adjacents().count { adjacentCube -> adjacentCube !in cubes } }.toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         allPoint3ds.forEach { removeTrapped(it) }
-        return cubes.sumOf { cube -> cube.adjacents().count { it !in cubes && it !in trapped } }
+        return cubes.sumOf { cube -> cube.adjacents().count { it !in cubes && it !in trapped } }.toString()
 
     }
 

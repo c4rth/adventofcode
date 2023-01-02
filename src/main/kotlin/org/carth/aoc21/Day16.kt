@@ -2,18 +2,18 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day16(private val data: String) : Puzzle<Int, Long>() {
+class Day16(input: String) : Puzzle<String, String>() {
 
-    override fun solvePartOne(): Int {
-        val binary = data.map { c -> Integer.parseInt(c.toString(), 16).toString(2).padStart(4, '0') }.joinToString("")
-        val packets = parse(Bits(binary))
-        return packets.sumOfVersion()
+    private val binary =
+        input.map { c -> Integer.parseInt(c.toString(), 16).toString(2).padStart(4, '0') }.joinToString("")
+    private val packets = parse(Bits(binary))
+
+    override fun solvePartOne(): String {
+        return packets.sumOfVersion().toString()
     }
 
-    override fun solvePartTwo(): Long {
-        val binary = data.map { c -> Integer.parseInt(c.toString(), 16).toString(2).padStart(4, '0') }.joinToString("")
-        val packets = parse(Bits(binary))
-        return packets.value()
+    override fun solvePartTwo(): String {
+        return packets.value().toString()
     }
 
     private fun parse(bits: Bits, packet: Packet? = null): Packet {
@@ -62,7 +62,8 @@ class Day16(private val data: String) : Puzzle<Int, Long>() {
         override fun value() = value
     }
 
-    class Operator(version: Int, private val type: Int, val subPackets: MutableList<Packet> = mutableListOf()) : Packet(version) {
+    class Operator(version: Int, private val type: Int, val subPackets: MutableList<Packet> = mutableListOf()) :
+        Packet(version) {
         override fun sumOfVersion() = version + subPackets.sumOf { it.sumOfVersion() }
 
         override fun value() = when (type) {

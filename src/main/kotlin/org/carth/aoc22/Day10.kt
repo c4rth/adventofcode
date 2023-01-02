@@ -2,19 +2,20 @@ package org.carth.aoc22
 
 import org.carth.common.Puzzle
 
-class Day10(private val data: List<String>) : Puzzle<Int, String>() {
+class Day10(input: String) : Puzzle<String, String>() {
+    private val data = input.lines()
 
-    override fun solvePartOne(): Int =
+    override fun solvePartOne(): String =
         CpuCrt(1).let {
             solve(it)
             it.signalStrength
-        }
+        }.toString()
 
     override fun solvePartTwo(): String =
         CpuCrt(2).let {
             solve(it)
             it.display
-        }
+        }.toString()
 
     private fun solve(cpu: CpuCrt) {
         data.forEach { line ->

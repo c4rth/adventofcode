@@ -2,26 +2,29 @@ package org.carth.aoc20
 
 import org.carth.common.Puzzle
 
-class Day05(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day05(input: String) : Puzzle<String, String>() {
 
-    override fun solvePartOne(): Int {
+    private val data = input.lines()
+
+    override fun solvePartOne(): String {
         return data.maxOf { line ->
             mapSeatId(line)
-        }
+        }.toString()
     }
 
-    override fun solvePartTwo(): Int {
-        return data.map { line ->
+    override fun solvePartTwo(): String {
+        return (data.map { line ->
             mapSeatId(line)
         }.sorted()
             .zipWithNext()
             .first { it.second - it.first != 1 }
-            .first + 1
+            .first + 1)
+            .toString()
     }
 
     private fun mapSeatId(line: String): Int {
-        val row = compute(line.take(7),  127, 'F')
-        val col = compute(line.drop(7),  7, 'L')
+        val row = compute(line.take(7), 127, 'F')
+        val col = compute(line.drop(7), 7, 'L')
         return row.first * 8 + col.first
     }
 

@@ -5,14 +5,16 @@ import org.carth.common.Puzzle
 typealias Elements = Map<String, Long>
 typealias Rules = Map<String, String>
 
-class Day14(private val data: List<String>) : Puzzle<Long, Long>() {
+class Day14(input: String) : Puzzle<String, String>() {
 
-    override fun solvePartOne(): Long {
-        return solve(10)
+    private val data = input.lines()
+
+    override fun solvePartOne(): String {
+        return solve(10).toString()
     }
 
-    override fun solvePartTwo(): Long {
-        return solve(40)
+    override fun solvePartTwo(): String {
+        return solve(40).toString()
     }
 
     private fun solve(times: Int): Long {

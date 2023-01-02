@@ -2,7 +2,9 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day06(private val data: List<String>) : Puzzle<Long, Long>() {
+class Day06(input: String) : Puzzle<String, String>() {
+
+    private val data = input.lines()
 
     private fun process(lifes: LongArray) {
         val newFish = lifes[0]
@@ -11,28 +13,28 @@ class Day06(private val data: List<String>) : Puzzle<Long, Long>() {
         lifes[8] = newFish
     }
 
-    private fun initLifes() : LongArray {
+    private fun initLifes(): LongArray {
         val fishes = data.first().split(",").map { it.toInt() }
         val lifes = LongArray(10) { 0 }
         for (index in 1..6) {
             lifes[index] = fishes.filter { it == index }.size.toLong()
         }
-        return  lifes
+        return lifes
     }
 
-    override fun solvePartOne(): Long {
+    override fun solvePartOne(): String {
         val lifes = initLifes()
         for (day in 1..80) {
             process(lifes)
         }
-        return lifes.sum()
+        return lifes.sum().toString()
     }
 
-    override fun solvePartTwo(): Long {
+    override fun solvePartTwo(): String {
         val lifes = initLifes()
         for (day in 1..256) {
             process(lifes)
         }
-        return lifes.sum()
+        return lifes.sum().toString()
     }
 }

@@ -2,20 +2,20 @@ package org.carth.aoc20
 
 import org.carth.common.Puzzle
 
-class Day08(data: List<String>) : Puzzle<Int, Int>() {
+class Day08(input: String) : Puzzle<String, String>() {
 
-    private val program = Program(data.map { instr ->
+    private val program = Program(input.lines().map { instr ->
         Triple(instr.take(3), instr.drop(4).toInt(), false)
     }.toMutableList())
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         while (!program.doubleExec) {
             program.execute()
         }
-        return program.total
+        return program.total.toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         program.instructions.forEachIndexed { idx, (instr, num, exec) ->
             if (instr != "acc") {
                 val newInstructions = program.instructions.toMutableList()
@@ -26,11 +26,11 @@ class Day08(data: List<String>) : Puzzle<Int, Int>() {
                     newProgram.execute()
                 }
                 if (newProgram.index == newProgram.instructions.size)
-                    return newProgram.total
+                    return newProgram.total.toString()
             }
         }
 
-        return 0
+        return "0"
     }
 
     class Program(val instructions: MutableList<Triple<String, Int, Boolean>>) {

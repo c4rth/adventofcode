@@ -3,8 +3,9 @@ package org.carth.aoc22
 import org.carth.common.Puzzle
 import java.lang.Integer.max
 
-class Day08(data: List<String>) : Puzzle<Int, Int>() {
+class Day08(input: String) : Puzzle<String, String>() {
 
+    private val data = input.lines()
     private val trees = data.map { line ->
         line.toCharArray().map { c -> c.digitToInt() }
     }
@@ -20,7 +21,7 @@ class Day08(data: List<String>) : Puzzle<Int, Int>() {
         return true
     }
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         var total = width * 2 + height * 2 - 4
         (1 until height - 1).forEach { row ->
             (1 until width - 1).forEach { col ->
@@ -33,7 +34,7 @@ class Day08(data: List<String>) : Puzzle<Int, Int>() {
                     total++
             }
         }
-        return total
+        return total.toString()
     }
 
     private fun scenicScore(tree: Int, lRange: IntProgression, cRange: IntProgression): Int {
@@ -47,7 +48,7 @@ class Day08(data: List<String>) : Puzzle<Int, Int>() {
         return score
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         var highestScore = 0
         (1 until height - 1).forEach { l ->
             (1 until width - 1).forEach { c ->
@@ -59,7 +60,7 @@ class Day08(data: List<String>) : Puzzle<Int, Int>() {
                 highestScore = max(highestScore, score)
             }
         }
-        return highestScore
+        return highestScore.toString()
     }
 
 }

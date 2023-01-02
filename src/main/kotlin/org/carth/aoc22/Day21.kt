@@ -3,19 +3,19 @@ package org.carth.aoc22
 import org.carth.common.Puzzle
 
 
-class Day21(private val data: List<String>) : Puzzle<Long, Long>() {
-
-    override fun solvePartOne(): Long {
+class Day21(input: String) : Puzzle<String, String>() {
+    private val data = input.lines()
+    override fun solvePartOne(): String {
         val tree = Tree()
         data.forEach { line ->
             tree.parse(line)
         }
-        return tree.find("root").evaluate()
+        return tree.find("root").evaluate().toString()
     }
 
 
     // Not my solution
-    override fun solvePartTwo(): Long {
+    override fun solvePartTwo(): String {
 
         val tree = Tree()
         data.forEach { line ->
@@ -55,7 +55,7 @@ class Day21(private val data: List<String>) : Puzzle<Long, Long>() {
                 current = right
             }
         }
-        return required
+        return required.toString()
     }
 
     class Tree {
@@ -98,6 +98,7 @@ class Day21(private val data: List<String>) : Puzzle<Long, Long>() {
 
         constructor(tree: Tree, id: String, value: Long) :
                 this(tree, id, value, true, "", "", "")
+
         constructor(tree: Tree, id: String, op1: String, opd: String, op2: String) :
                 this(tree, id, 0L, false, op1, opd, op2)
 

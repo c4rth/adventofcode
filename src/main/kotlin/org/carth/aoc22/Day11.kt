@@ -2,11 +2,11 @@ package org.carth.aoc22
 
 import org.carth.common.Puzzle
 
-class Day11(private val data: List<String>) : Puzzle<Long, Long>() {
+class Day11(input: String) : Puzzle<String, String>() {
+    private val data = input.lines()
+    override fun solvePartOne(): String = solve(20, 3).toString()
 
-    override fun solvePartOne(): Long = solve(20, 3)
-
-    override fun solvePartTwo(): Long = solve(10000, 1)
+    override fun solvePartTwo(): String = solve(10000, 1).toString()
 
     private fun parse(): List<Monkey> {
         val monkeys = ArrayList<Monkey>()

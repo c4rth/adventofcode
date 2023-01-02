@@ -2,7 +2,9 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day25(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day25(input: String) : Puzzle<String, String>() {
+
+    private val data = input.lines()
 
     private fun parse(input: List<String>): Array<CharArray> =
         input.map { line -> line.toCharArray() }.toTypedArray()
@@ -21,7 +23,7 @@ class Day25(private val data: List<String>) : Puzzle<Int, Int>() {
         return list
     }
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         val grid = parse(data)
         var numberOfMoves: Int
         var times = 0
@@ -47,10 +49,10 @@ class Day25(private val data: List<String>) : Puzzle<Int, Int>() {
             }
             times++
         } while (numberOfMoves > 0)
-        return times
+        return times.toString()
     }
 
-    override fun solvePartTwo(): Int {
-        return 0
+    override fun solvePartTwo(): String {
+        return "0"
     }
 }

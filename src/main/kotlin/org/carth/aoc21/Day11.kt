@@ -2,12 +2,12 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day11(private val data: List<String>) : Puzzle<Int, Int>() {
-
-    override fun solvePartOne(): Int {
+class Day11(input: String) : Puzzle<String, String>() {
+    private val data = input.lines()
+    override fun solvePartOne(): String {
         val grid = Grid(data)
         var total = 0
-        var toExplode : ArrayDeque<Coord>
+        var toExplode: ArrayDeque<Coord>
         for (index in 1..100) {
             toExplode = grid.increaseLevel()
             while (toExplode.isNotEmpty()) {
@@ -16,12 +16,12 @@ class Day11(private val data: List<String>) : Puzzle<Int, Int>() {
                 toExplode += grid.explodeAround(coord)
             }
         }
-        return total
+        return total.toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         val grid = Grid(data)
-        var toExplode : ArrayDeque<Coord>
+        var toExplode: ArrayDeque<Coord>
         var index = 0
         while (true) {
             index += 1
@@ -30,7 +30,7 @@ class Day11(private val data: List<String>) : Puzzle<Int, Int>() {
                 val coord = toExplode.removeFirst()
                 toExplode += grid.explodeAround(coord)
             }
-            if (grid.isSynchro()) return index
+            if (grid.isSynchro()) return index.toString()
         }
     }
 

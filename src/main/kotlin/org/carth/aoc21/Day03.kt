@@ -2,9 +2,11 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day03(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day03(input: String) : Puzzle<String, String>() {
 
-    override fun solvePartOne(): Int {
+    private val data = input.lines()
+
+    override fun solvePartOne(): String {
         val length = data.first().length - 1
         val counterOf1 = IntArray(length + 1) { 0 }
         data.forEach { line ->
@@ -21,7 +23,7 @@ class Day03(private val data: List<String>) : Puzzle<Int, Int>() {
                 epsilon.append(map[!test])
             }
         }
-        return gamma.toString().toInt(2) * epsilon.toString().toInt(2)
+        return (gamma.toString().toInt(2) * epsilon.toString().toInt(2)).toString()
     }
 
     private fun getCounters(index: Int, data: List<String>): Pair<Int, Int> {
@@ -48,7 +50,7 @@ class Day03(private val data: List<String>) : Puzzle<Int, Int>() {
         return input.first()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
 
         val oxygen = getGas(data) { counterOf0, counterOf1 ->
             if (counterOf0 > counterOf1) '0' else '1'
@@ -58,6 +60,6 @@ class Day03(private val data: List<String>) : Puzzle<Int, Int>() {
             if (counterOf0 <= counterOf1) '0' else '1'
         }
 
-        return oxygen.toInt(2) * co2.toInt(2)
+        return (oxygen.toInt(2) * co2.toInt(2)).toString()
     }
 }

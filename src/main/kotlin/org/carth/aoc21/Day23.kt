@@ -10,7 +10,9 @@ import kotlin.math.min
 // Solved by hand
 // Solution from https://topaz.github.io/paste/#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
 
-class Day23(private val data: List<String>) : Puzzle<Long, Long>() {
+class Day23(input: String) : Puzzle<String, String>() {
+
+    private val data = input.lines()
 
     object Constants {
         val moveCosts = intArrayOf(1, 10, 100, 1000)
@@ -215,11 +217,11 @@ class Day23(private val data: List<String>) : Puzzle<Long, Long>() {
             }
     }
 
-    override fun solvePartOne(): Long {
-        return solvePosition()
+    override fun solvePartOne(): String {
+        return solvePosition().toString()
     }
 
-    override fun solvePartTwo(): Long {
-        return solvePosition()
+    override fun solvePartTwo(): String {
+        return solvePosition().toString()
     }
 }

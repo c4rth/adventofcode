@@ -3,7 +3,9 @@ package org.carth.aoc22
 import org.carth.common.Puzzle
 import kotlin.math.pow
 
-class Day25(private val data: List<String>) : Puzzle<String, String>() {
+class Day25(input: String) : Puzzle<String, String>() {
+
+    private val data = input.lines()
 
     override fun solvePartOne(): String {
         val number = data.sumOf { snafu -> snafu.toDecimal() }

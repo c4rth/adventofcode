@@ -4,11 +4,13 @@ import org.carth.common.Puzzle
 
 typealias Image = Array<IntArray>
 
-class Day20(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day20(input: String) : Puzzle<String, String>() {
 
-    override fun solvePartOne(): Int = solve(2)
+    private val data = input.lines()
 
-    override fun solvePartTwo(): Int = solve(50)
+    override fun solvePartOne(): String = solve(2).toString()
+
+    override fun solvePartTwo(): String = solve(50).toString()
 
     private fun solve(times: Int): Int {
         var (algorithm, image) = parse()
@@ -31,7 +33,8 @@ class Day20(private val data: List<String>) : Puzzle<Int, Int>() {
         var acc = 0
         for (il in -1..1) {
             for (ic in -1..1) {
-                val value = if ((l + il) in image.indices && (c + ic) in image.indices) image[l + il][c + ic] else default
+                val value =
+                    if ((l + il) in image.indices && (c + ic) in image.indices) image[l + il][c + ic] else default
                 acc = acc * 2 + value
             }
         }

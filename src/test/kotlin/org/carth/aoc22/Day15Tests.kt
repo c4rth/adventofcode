@@ -4,55 +4,35 @@ import org.carth.common.DayTests
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 
-class Day15Tests : DayTests() {
+class Day15Tests : DayTests<Day15>(Day15::class) {
 
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day15PartOneTest {
-
-        @Test
-        @Order(1)
-        fun `solve part one of sample`() {
-            // Act
-            val answer = Day15(testInputAsListOfString()).solvePartOne(10)
-
-            // Assert
-            assertEquals(26, answer)
-        }
-
-        @Test
-        @Order(2)
-        fun `solve part one`() {
-            // Act
-            val answer = Day15(inputAsListOfString()).solvePartOne(2_000_000)
-
-            // Assert
-            assertEquals(4876693, answer)
-        }
+    @Test
+    @Order(1)
+    fun solvePartOneSample() {
+        val answer = Day15(readInput(Type.TEST)).solvePartOne(10)
+        assertEquals("26", answer)
     }
 
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day15PartTwoTest {
 
-        @Test
-        @Order(1)
-        fun `solve part two of sample`() {
-            // Act
-            val answer = Day15(testInputAsListOfString()).solvePartTwo(40)
+    @Test
+    @Order(2)
+    fun solvePartOne() {
+        val answer = Day15(readInput(Type.INPUT)).solvePartOne(2_000_000)
+        assertEquals("4876693", answer)
+    }
 
-            // Assert
-            assertEquals(56_000_011L, answer)
-        }
+    @Test
+    @Order(3)
+    fun solvePartTwoSample() {
+        val answer = Day15(readInput(Type.TEST)).solvePartTwo(40)
+        assertEquals("56000011", answer)
+    }
 
-        @Test
-        @Order(2)
-        fun `solve part two`() {
-            // Act
-            val answer = Day15(inputAsListOfString()).solvePartTwo(4_000_000)
-            // Assert
-            assertEquals(11_645_454_855_041L, answer)
-        }
+    @Test
+    @Order(4)
+    fun solvePartTwo() {
+        val answer = Day15(readInput(Type.INPUT)).solvePartTwo(4_000_000)
+        assertEquals("11645454855041", answer)
     }
 
 }

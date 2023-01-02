@@ -2,9 +2,11 @@ package org.carth.aoc20
 
 import org.carth.common.Puzzle
 
-class Day01(private val data: List<Int>) : Puzzle<Int, Int>() {
+class Day01(input: String) : Puzzle<String, String>() {
 
-    override fun solvePartOne(): Int {
+    private val data = input.lines().map { it.toInt() }
+
+    override fun solvePartOne(): String {
         var first = 0
         var second = 0
         for (x in data) {
@@ -14,10 +16,10 @@ class Day01(private val data: List<Int>) : Puzzle<Int, Int>() {
                 break
             }
         }
-        return first * second
+        return (first * second).toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         var first = 0
         var second = 0
         var third = 0
@@ -33,6 +35,6 @@ class Day01(private val data: List<Int>) : Puzzle<Int, Int>() {
                 }
             }
         }
-        return first * second * third
+        return (first * second * third).toString()
     }
 }

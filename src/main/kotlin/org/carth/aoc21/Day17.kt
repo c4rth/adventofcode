@@ -4,7 +4,9 @@ import org.carth.common.Puzzle
 import java.lang.Integer.max
 import kotlin.math.abs
 
-class Day17(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day17(input: String) : Puzzle<String, String>() {
+
+    private val data = input.lines()
 
     private fun readData(str: String): List<Int> =
         "target area: x=(\\d+)\\.\\.(\\d+), y=(-\\d+)\\.\\.(-\\d+)".toRegex()
@@ -13,16 +15,16 @@ class Day17(private val data: List<String>) : Puzzle<Int, Int>() {
             .toList()
             .map { it.toInt() }
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         val (fromX, toX, fromY, toY) = readData(data.first())
         val (maxHeight, _) = solve(fromX, toX, fromY, toY)
-        return maxHeight
+        return maxHeight.toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         val (fromX, toX, fromY, toY) = readData(data.first())
         val (_, number) = solve(fromX, toX, fromY, toY)
-        return number
+        return number.toString()
     }
 
     private fun solve(fromX: Int, toX: Int, fromY: Int, toY: Int): Pair<Int, Int> {

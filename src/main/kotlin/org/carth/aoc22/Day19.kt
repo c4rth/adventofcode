@@ -6,9 +6,9 @@ import kotlin.math.max
 import kotlin.math.min
 
 
-class Day19(data: List<String>) : Puzzle<Int, Int>() {
+class Day19(input: String) : Puzzle<String, String>() {
 
-    private val blueprints = data.map { line ->
+    private val blueprints = input.lines().map { line ->
         line.split(" ").let {
             Blueprint(
                 listOf(
@@ -21,14 +21,14 @@ class Day19(data: List<String>) : Puzzle<Int, Int>() {
         }
     }
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         return blueprints.mapIndexed { index, blueprint ->
             BlueprintSimulator(blueprint, 24).getMostGeodes() * (index + 1)
-        }.sum()
+        }.sum().toString()
     }
 
-    override fun solvePartTwo(): Int {
-        return blueprints.take(3).map { BlueprintSimulator(it, 32).getMostGeodes() }.reduce(Int::times)
+    override fun solvePartTwo(): String {
+        return blueprints.take(3).map { BlueprintSimulator(it, 32).getMostGeodes() }.reduce(Int::times).toString()
     }
 
     data class Blueprint(val costs: List<RobotCost>)

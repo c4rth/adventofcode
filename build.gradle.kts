@@ -7,6 +7,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:multik-api:0.1.1")
     implementation("org.jetbrains.kotlinx:multik-default:0.2.1")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")

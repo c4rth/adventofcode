@@ -3,7 +3,9 @@ package org.carth.aoc21
 import org.carth.common.Puzzle
 
 
-class Day24(private val data: List<String>) : Puzzle<Long, Long>() {
+class Day24(input: String) : Puzzle<String, String>() {
+
+    private val data = input.lines()
 
     // Faster solution : not mine : credits to lolofonik
     private fun run(part2: Boolean): Long {
@@ -28,15 +30,15 @@ class Day24(private val data: List<String>) : Puzzle<Long, Long>() {
         return result.joinToString("").toLong()
     }
 
-    override fun solvePartOne(): Long = run(false)
+    override fun solvePartOne(): String = run(false).toString()
 
-    override fun solvePartTwo(): Long = run(true)
+    override fun solvePartTwo(): String = run(true).toString()
 
 
     private fun List<String>.lastOf(command: String) = last { it.startsWith(command) }.split(" ").last().toInt()
 
 // DUMB solutions : mine
-//    override fun solvePartOne(): Long {
+//    override fun solvePartOne(): String {
 //
 //        var valid = 0L
 //
@@ -88,7 +90,7 @@ class Day24(private val data: List<String>) : Puzzle<Long, Long>() {
 //        return valid
 //    }
 //
-//    override fun solvePartTwo(): Long {
+//    override fun solvePartTwo(): String {
 //
 //        var valid = 0L
 //

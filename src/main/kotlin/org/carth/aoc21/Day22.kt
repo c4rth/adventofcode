@@ -1,19 +1,22 @@
 package org.carth.aoc21
 
 import org.carth.common.Puzzle
-import kotlin.math.min
 import kotlin.math.max
+import kotlin.math.min
 
-class Day22(private val data: List<String>) : Puzzle<Long, Long>() {
-    override fun solvePartOne(): Long {
+class Day22(input: String) : Puzzle<String, String>() {
+
+    private val data = input.lines()
+
+    override fun solvePartOne(): String {
         val limit = Cube(Point3d(-50, -50, -50), Point3d(50, 50, 50))
         val steps = parseData(data).filter { it.cube.intersect(limit) != null }
-        return markAllCubes(steps)
+        return markAllCubes(steps).toString()
     }
 
-    override fun solvePartTwo(): Long {
+    override fun solvePartTwo(): String {
         val steps = parseData(data)
-        return markAllCubes(steps)
+        return markAllCubes(steps).toString()
     }
 
     private fun parseData(input: List<String>): List<Step> {
@@ -21,7 +24,12 @@ class Day22(private val data: List<String>) : Puzzle<Long, Long>() {
         val regex = "\\w+ x=(-?\\d+)\\.\\.(-?\\d+),y=(-?\\d+)\\.\\.(-?\\d+),z=(-?\\d+)\\.\\.(-?\\d+)".toRegex()
         input.forEach { line ->
             val coord = regex.matchEntire(line)!!.destructured.toList().map { it.toLong() }.toList()
-            steps.add(Step(line.startsWith("on"), Cube(Point3d(coord[0], coord[2], coord[4]), Point3d(coord[1], coord[3], coord[5]))))
+            steps.add(
+                Step(
+                    line.startsWith("on"),
+                    Cube(Point3d(coord[0], coord[2], coord[4]), Point3d(coord[1], coord[3], coord[5]))
+                )
+            )
         }
         return steps
     }
@@ -43,7 +51,7 @@ class Day22(private val data: List<String>) : Puzzle<Long, Long>() {
             }
             updatedCounts.clear()
         }
-        return counts.toList().fold(0L) { acc, (cube, count) ->  acc + cube.volume * count}
+        return counts.toList().fold(0L) { acc, (cube, count) -> acc + cube.volume * count }
     }
 
 }
@@ -55,7 +63,8 @@ private data class Cube(val from: Point3d, val to: Point3d) {
     val volume = ((to.x - from.x + 1) * (to.y - from.y + 1) * (to.z - from.z + 1))
 
     fun intersect(other: Cube): Cube? {
-        val pFrom = Point3d(max(this.from.x, other.from.x), max(this.from.y, other.from.y), max(this.from.z, other.from.z))
+        val pFrom =
+            Point3d(max(this.from.x, other.from.x), max(this.from.y, other.from.y), max(this.from.z, other.from.z))
         val pTo = Point3d(min(this.to.x, other.to.x), min(this.to.y, other.to.y), min(this.to.z, other.to.z))
         return if (pFrom <= pTo) Cube(pFrom, pTo) else null
     }

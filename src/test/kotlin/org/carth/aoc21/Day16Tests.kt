@@ -2,168 +2,67 @@ package org.carth.aoc21
 
 import org.carth.common.DayTests
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.Assertions.assertEquals
 
 
-class Day16Tests : DayTests() {
+class Day16Tests : DayTests<Day16>(Day16::class) {
 
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day16PartOneTest {
+    @Test
+    @Order(1)
+    fun solvePartOneSample1a() = solve(Part.ONE, Type.TEST, "1a", expected = "6")
 
-        @Test
-        @Order(2)
-        fun `solve part one of sample a`() {
-            // Act
-            val answer = Day16(testInputAsText("1a")).solvePartOne()
+    @Test
+    @Order(2)
+    fun solvePartOneSample1b() = solve(Part.ONE, Type.TEST, "1b", expected = "16")
 
-            // Assert
-            assertEquals(6, answer)
-        }
+    @Test
+    @Order(3)
+    fun solvePartOneSample1c() = solve(Part.ONE, Type.TEST, "1c", expected = "12")
 
-        @Test
-        @Order(3)
-        fun `solve part one of sample b`() {
-            // Act
-            val answer = Day16(testInputAsText("1b")).solvePartOne()
+    @Test
+    @Order(4)
+    fun solvePartOneSample1d() = solve(Part.ONE, Type.TEST, "1d", expected = "23")
 
-            // Assert
-            assertEquals(16, answer)
-        }
+    @Test
+    @Order(5)
+    fun solvePartOneSample1e() = solve(Part.ONE, Type.TEST, "1e", expected = "31")
 
-        @Test
-        @Order(4)
-        fun `solve part one of sample c`() {
-            // Act
-            val answer = Day16(testInputAsText("1c")).solvePartOne()
+    @Test
+    @Order(6)
+    fun solvePartOne() = solve(Part.ONE, Type.INPUT, expected = "991")
 
-            // Assert
-            assertEquals(12, answer)
-        }
+    @Test
+    @Order(7)
+    fun solvePartTwoSample2a() = solve(Part.TWO, Type.TEST, "2a", expected = "3")
 
-        @Test
-        @Order(5)
-        fun `solve part one of sample d`() {
-            // Act
-            val answer = Day16(testInputAsText("1d")).solvePartOne()
+    @Test
+    @Order(8)
+    fun solvePartTwoSample2b() = solve(Part.TWO, Type.TEST, "2b", expected = "54")
 
-            // Assert
-            assertEquals(23, answer)
-        }
+    @Test
+    @Order(9)
+    fun solvePartTwoSample2c() = solve(Part.TWO, Type.TEST, "2c", expected = "7")
 
-        @Test
-        @Order(6)
-        fun `solve part one of sample e`() {
-            // Act
-            val answer = Day16(testInputAsText("1e")).solvePartOne()
+    @Test
+    @Order(10)
+    fun solvePartTwoSample2d() = solve(Part.TWO, Type.TEST, "2d", expected = "9")
 
-            // Assert
-            assertEquals(31, answer)
-        }
+    @Test
+    @Order(11)
+    fun solvePartTwoSample2e() = solve(Part.TWO, Type.TEST, "2e", expected = "1")
 
-        @Test
-        @Order(7)
-        fun `solve part one`() {
-            // Act
-            val answer = Day16(inputAsText()).solvePartOne()
+    @Test
+    @Order(12)
+    fun solvePartTwoSample2f() = solve(Part.TWO, Type.TEST, "2f", expected = "0")
 
-            // Assert
-            assertEquals(991, answer)
-        }
-    }
+    @Test
+    @Order(13)
+    fun solvePartTwoSample2g() = solve(Part.TWO, Type.TEST, "2g", expected = "0")
 
-    @Nested
-    @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-    inner class Day16PartTwoTest {
+    @Test
+    @Order(14)
+    fun solvePartTwoSample2h() = solve(Part.TWO, Type.TEST, "2h", expected = "1")
 
-        @Test
-        @Order(2)
-        fun `solve part one of sample a`() {
-            // Act
-            val answer = Day16(testInputAsText("2a")).solvePartTwo()
-
-            // Assert
-            assertEquals(3, answer)
-        }
-
-        @Test
-        @Order(3)
-        fun `solve part one of sample b`() {
-            // Act
-            val answer = Day16(testInputAsText("2b")).solvePartTwo()
-
-            // Assert
-            assertEquals(54, answer)
-        }
-
-        @Test
-        @Order(4)
-        fun `solve part one of sample c`() {
-            // Act
-            val answer = Day16(testInputAsText("2c")).solvePartTwo()
-
-            // Assert
-            assertEquals(7, answer)
-        }
-
-        @Test
-        @Order(5)
-        fun `solve part one of sample d`() {
-            // Act
-            val answer = Day16(testInputAsText("2d")).solvePartTwo()
-
-            // Assert
-            assertEquals(9, answer)
-        }
-
-        @Test
-        @Order(6)
-        fun `solve part one of sample e`() {
-            // Act
-            val answer = Day16(testInputAsText("2e")).solvePartTwo()
-
-            // Assert
-            assertEquals(1, answer)
-        }
-
-        @Test
-        @Order(7)
-        fun `solve part one of sample f`() {
-            // Act
-            val answer = Day16(testInputAsText("2f")).solvePartTwo()
-
-            // Assert
-            assertEquals(0, answer)
-        }
-
-        @Test
-        @Order(8)
-        fun `solve part one of sample g`() {
-            // Act
-            val answer = Day16(testInputAsText("2g")).solvePartTwo()
-
-            // Assert
-            assertEquals(0, answer)
-        }
-
-        @Test
-        @Order(8)
-        fun `solve part one of sample h`() {
-            // Act
-            val answer = Day16(testInputAsText("2h")).solvePartTwo()
-
-            // Assert
-            assertEquals(1, answer)
-        }
-
-        @Test
-        @Order(9)
-        fun `solve part one`() {
-            // Act
-            val answer = Day16(inputAsText()).solvePartTwo()
-
-            // Assert
-            assertEquals(1264485568252, answer)
-        }
-    }
+    @Test
+    @Order(15)
+    fun solvePartTwo() = solve(Part.TWO, Type.INPUT, expected = "1264485568252")
 }

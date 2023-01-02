@@ -5,20 +5,20 @@ import org.carth.common.Puzzle
 import java.lang.Integer.max
 import java.lang.Integer.min
 
-class Day14(private val data: List<String>) : Puzzle<Int, Int>() {
-
+class Day14(input: String) : Puzzle<String, String>() {
+    private val data = input.lines()
     private val start = Point(500, 0)
     private val down = Point(0, 1)
     private val downLeft = Point(-1, 1)
     private val downRight = Point(1, 1)
 
-    override fun solvePartOne(): Int {
+    override fun solvePartOne(): String {
         val grid = parse()
         val bottom: Int = grid.maxOf { point -> point.y }
         return solve(grid) { sand -> sand.y < bottom }
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         val grid = parse()
         val left: Int = grid.minOf { point -> point.x }
         val right: Int = grid.maxOf { point -> point.x }
@@ -29,7 +29,7 @@ class Day14(private val data: List<String>) : Puzzle<Int, Int>() {
         return solve(grid) { _ -> !grid.contains(start) }
     }
 
-    private fun solve(grid: MutableCollection<Point>, test: (Point) -> Boolean): Int {
+    private fun solve(grid: MutableCollection<Point>, test: (Point) -> Boolean): String {
         var sand = start
         var count = 0
         do {
@@ -42,7 +42,7 @@ class Day14(private val data: List<String>) : Puzzle<Int, Int>() {
                 newSand
             }
         } while (test(sand))
-        return count
+        return count.toString()
     }
 
     private fun moveSand(grid: MutableCollection<Point>, sand: Point): Point {

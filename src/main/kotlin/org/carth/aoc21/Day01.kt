@@ -2,22 +2,25 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day01(private val data : List<Int>) : Puzzle<Int, Int>() {
+class Day01(input: String) : Puzzle<String, String>() {
 
-   override fun solvePartOne(): Int {
+    private val data = input.lines()
 
-        return data
+    override fun solvePartOne(): String {
+        return data.map { it.toInt() }
             .windowed(2)
-            .filter { (a,b) -> a < b }
+            .filter { (a, b) -> a < b }
             .size
+            .toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
 
-        return data.windowed(3)
+        return data.map { it.toInt() }.windowed(3)
             .map { it[0] + it[1] + it[2] }
             .windowed(2)
             .filter { (a, b) -> a < b }
             .size
+            .toString()
     }
 }

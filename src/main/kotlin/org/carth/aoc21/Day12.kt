@@ -2,18 +2,20 @@ package org.carth.aoc21
 
 import org.carth.common.Puzzle
 
-class Day12(private val data: List<String>) : Puzzle<Int, Int>() {
+class Day12(input: String) : Puzzle<String, String>() {
 
-    override fun solvePartOne(): Int {
+    private val data = input.lines()
+
+    override fun solvePartOne(): String {
         val edges = readEdges()
         val paths = getPaths(mutableListOf("start"), edges, false)
-        return paths.size
+        return paths.size.toString()
     }
 
-    override fun solvePartTwo(): Int {
+    override fun solvePartTwo(): String {
         val edges = readEdges()
         val paths = getPaths(mutableListOf("start"), edges, true)
-        return paths.size
+        return paths.size.toString()
 
     }
 
@@ -27,7 +29,11 @@ class Day12(private val data: List<String>) : Puzzle<Int, Int>() {
         return edges
     }
 
-    private fun getPaths(path: MutableList<String>, edges: Map<String, List<String>>, allowTwice: Boolean): List<List<String>> {
+    private fun getPaths(
+        path: MutableList<String>,
+        edges: Map<String, List<String>>,
+        allowTwice: Boolean
+    ): List<List<String>> {
         if (path[path.size - 1] == "end") {
             return listOf(path.toMutableList())
         }
