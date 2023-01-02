@@ -4,6 +4,7 @@ import org.carth.common.Puzzle
 import java.util.*
 
 typealias Crates = Stack<Char>
+
 class Day05(private val data: String) : Puzzle<String, String>() {
 
     override fun solvePartOne(): String {
