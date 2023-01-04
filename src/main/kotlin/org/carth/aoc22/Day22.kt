@@ -1,9 +1,10 @@
 package org.carth.aoc22
 
+import org.carth.common.Direction
 import org.carth.common.Point
 import org.carth.common.Puzzle
 
-typealias State = Pair<Day22.Direction, Point>
+typealias State = Pair<Direction, Point>
 
 class Day22(input: String) : Puzzle<Int, Int>() {
     private val data = input.lines()
@@ -17,10 +18,10 @@ class Day22(input: String) : Puzzle<Int, Int>() {
             val direction = dir.turnLeft()
             var (x, y) = pos
             when (direction) {
-                Direction.DOWN -> x = board[y].indexOfFirst { it != ' ' }
-                Direction.RIGHT -> y = board.indexOfFirst { x in it.indices && it[x] != ' ' }
-                Direction.UP -> x = board[y].indexOfLast { it != ' ' }
-                Direction.LEFT -> y = board.indexOfLast { x in it.indices && it[x] != ' ' }
+                Direction.SOUTH -> x = board[y].indexOfFirst { it != ' ' }
+                Direction.EAST -> y = board.indexOfFirst { x in it.indices && it[x] != ' ' }
+                Direction.NORTH -> x = board[y].indexOfLast { it != ' ' }
+                Direction.WEST -> y = board.indexOfLast { x in it.indices && it[x] != ' ' }
             }
             adjacencyMap[direction to pos] = direction to Point(x, y)
         }
@@ -58,7 +59,7 @@ class Day22(input: String) : Puzzle<Int, Int>() {
 
     fun solve(adjacencyMap: Map<State, State>): Int {
         var pos = Point(board[0].indexOf('.'), 0)
-        var dir = Direction.DOWN
+        var dir = Direction.SOUTH
         for (move in moves) {
             when (move) {
                 "L" -> dir = dir.turnLeft()
@@ -75,10 +76,10 @@ class Day22(input: String) : Puzzle<Int, Int>() {
     }
 
     private fun Point.move(direction: Direction) = when (direction) {
-        Direction.DOWN -> Point(x + 1, y)
-        Direction.RIGHT -> Point(x, y + 1)
-        Direction.UP -> Point(x - 1, y)
-        Direction.LEFT -> Point(x, y - 1)
+        Direction.SOUTH -> Point(x + 1, y)
+        Direction.EAST -> Point(x, y + 1)
+        Direction.NORTH -> Point(x - 1, y)
+        Direction.WEST -> Point(x, y - 1)
     }
 
     operator fun List<String>.get(pos: Point): Char = getOrNull(pos.y)?.getOrNull(pos.x) ?: ' '
@@ -87,7 +88,7 @@ class Day22(input: String) : Puzzle<Int, Int>() {
         val initialPos = Point(board[0].indexOf('.'), 0)
         return buildList {
             var pos = initialPos
-            var dir = Direction.DOWN
+            var dir = Direction.SOUTH
             do {
                 add(State(dir, pos))
                 val forward = pos.move(dir)
@@ -102,19 +103,8 @@ class Day22(input: String) : Puzzle<Int, Int>() {
                         dir = dir.turnLeft()
                     }
                 }
-            } while (pos != initialPos || dir != Direction.DOWN)
+            } while (pos != initialPos || dir != Direction.SOUTH)
         }
     }
 
-    enum class Direction(val value: Int) {
-        DOWN(0), RIGHT(1), UP(2), LEFT(3);
-
-        fun turnLeft() = Direction.from((this.value - 1).mod(4))
-
-        fun turnRight() = Direction.from((this.value + 1).mod(4))
-
-        companion object {
-            infix fun from(value: Int): Direction = Direction.values().firstOrNull { it.value == value }!!
-        }
-    }
 }
