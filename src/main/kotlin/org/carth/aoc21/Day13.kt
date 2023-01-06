@@ -1,5 +1,6 @@
 package org.carth.aoc21
 
+import org.carth.common.Point2d
 import org.carth.common.Puzzle
 import java.lang.Integer.max
 
@@ -10,14 +11,14 @@ class Day13(input: String) : Puzzle<Int, Int>() {
 
     private fun readGridAndFolding(): Pair<Grid, List<Pair<String, Int>>> {
         val folding = mutableListOf<Pair<String, Int>>()
-        val points = mutableListOf<Pair<Int, Int>>()
+        val points = mutableListOf<Point2d>()
         var max = (0 to 0)
         data.forEach { line ->
             if (line.isNotEmpty()) {
                 if (line.first().isDigit()) {
                     val (c, l) = line.split(",").map { it.toInt() }
                     max = (max(max.first, l) to max(max.second, c))
-                    points.add(l to c)
+                    points.add(Point2d(l,c))
                 } else {
                     val (axis, position) = line.split("=")
                     if (axis.endsWith("y"))

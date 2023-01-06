@@ -1,7 +1,7 @@
 package org.carth.aoc21
 
 import org.carth.common.Puzzle
-import kotlin.math.abs
+import org.carth.common.Point3d
 
 // https://github.com/ClouddJR/AdventOfCode2021/blob/master/src/main/kotlin/com/clouddjr/advent2021/Day19.kt
 
@@ -21,10 +21,10 @@ class Day19(input: String) : Puzzle<Int, Int>() {
         val scanners = mutableListOf<Scanner>()
         var index = 1
         while (index < input.size - 1) {
-            val points = mutableSetOf<Point3D>()
+            val points = mutableSetOf<Point3d>()
             while (index < input.size - 1 && input[index].isNotEmpty()) {
                 val (x, y, z) = input[index].split(",").map { it.toInt() }
-                points.add(Point3D(x, y, z))
+                points.add(Point3d(x, y, z))
                 index++
             }
             scanners.add(Scanner(points))
@@ -35,7 +35,7 @@ class Day19(input: String) : Puzzle<Int, Int>() {
 
     private fun assembleMap(): AssembledMap {
         val foundBeacons = scanners.first().beacons.toMutableSet()
-        val foundScannersPositions = mutableSetOf(Point3D(0, 0, 0))
+        val foundScannersPositions = mutableSetOf(Point3d(0, 0, 0))
 
         val remaining = ArrayDeque<Scanner>().apply { addAll(scanners.drop(1)) }
         while (remaining.isNotEmpty()) {
@@ -52,7 +52,7 @@ class Day19(input: String) : Puzzle<Int, Int>() {
         return AssembledMap(foundBeacons, foundScannersPositions)
     }
 
-    private data class Scanner(val beacons: Set<Point3D>) {
+    private data class Scanner(val beacons: Set<Point3d>) {
         fun allRotations() = beacons.map { it.allRotations() }.transpose().map { Scanner(it) }
 
         fun getTransformedIfOverlap(otherScanner: Scanner): TransformedScanner? {
@@ -70,7 +70,7 @@ class Day19(input: String) : Puzzle<Int, Int>() {
             }
         }
 
-        private fun List<Set<Point3D>>.transpose(): List<Set<Point3D>> {
+        private fun List<Set<Point3d>>.transpose(): List<Set<Point3d>> {
             return when (all { it.isNotEmpty() }) {
                 true -> listOf(map { it.first() }.toSet()) + map { it.drop(1).toSet() }.transpose()
                 false -> emptyList()
@@ -78,25 +78,8 @@ class Day19(input: String) : Puzzle<Int, Int>() {
         }
     }
 
-    private data class TransformedScanner(val beacons: Set<Point3D>, val position: Point3D)
+    private data class TransformedScanner(val beacons: Set<Point3d>, val position: Point3d)
 
-    private data class AssembledMap(val beacons: Set<Point3D>, val scannersPositions: Set<Point3D>)
+    private data class AssembledMap(val beacons: Set<Point3d>, val scannersPositions: Set<Point3d>)
 
-    private data class Point3D(val x: Int, val y: Int, val z: Int) {
-        operator fun plus(other: Point3D) = Point3D(x + other.x, y + other.y, z + other.z)
-
-        operator fun minus(other: Point3D) = Point3D(x - other.x, y - other.y, z - other.z)
-
-        infix fun distanceTo(other: Point3D) = abs(x - other.x) + abs(y - other.y) + abs(z - other.z)
-
-        fun allRotations(): Set<Point3D> {
-            return setOf(
-                Point3D(x, y, z), Point3D(x, -z, y), Point3D(x, -y, -z), Point3D(x, z, -y), Point3D(-x, -y, z),
-                Point3D(-x, -z, -y), Point3D(-x, y, -z), Point3D(-x, z, y), Point3D(-z, x, -y), Point3D(y, x, -z),
-                Point3D(z, x, y), Point3D(-y, x, z), Point3D(z, -x, -y), Point3D(y, -x, z), Point3D(-z, -x, y),
-                Point3D(-y, -x, -z), Point3D(-y, -z, x), Point3D(z, -y, x), Point3D(y, z, x), Point3D(-z, y, x),
-                Point3D(z, y, -x), Point3D(-y, z, -x), Point3D(-z, -y, -x), Point3D(y, -z, -x),
-            )
-        }
-    }
 }

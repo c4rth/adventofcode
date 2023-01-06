@@ -1,6 +1,6 @@
 package org.carth.aoc22
 
-import org.carth.common.Point
+import org.carth.common.Point2d
 import org.carth.common.Puzzle
 import kotlin.math.min
 
@@ -53,18 +53,18 @@ class Day24(input: String) : Puzzle<Int, Int>() {
         private val height: Int
             get() = _map.size
 
-        val start: Point
-            get() = Point(_map[0].indexOfFirst { it[0] == EMPTY }, 0)
+        val start: Point2d
+            get() = Point2d(_map[0].indexOfFirst { it[0] == EMPTY }, 0)
 
-        val end: Point
-            get() = Point(_map[height - 1].indexOfFirst { it[0] == EMPTY }, height - 1)
+        val end: Point2d
+            get() = Point2d(_map[height - 1].indexOfFirst { it[0] == EMPTY }, height - 1)
 
-        private fun get(point: Point) = _map[point.y][point.x]
+        private fun get(point2d: Point2d) = _map[point2d.y][point2d.x]
 
         private fun moveBlizzards(): PuzzleMap {
             val newMap = PuzzleMap(width, height)
 
-            fun moveBlizzard(blizzard: Char, step: Point, edge: Point) {
+            fun moveBlizzard(blizzard: Char, step: Point2d, edge: Point2d) {
                 if (get(step).first() == WALL) {
                     newMap.get(edge).add(blizzard)
                 } else {
@@ -74,15 +74,15 @@ class Day24(input: String) : Puzzle<Int, Int>() {
 
             _map.forEachIndexed { y, currentRow ->
                 currentRow.forEachIndexed { x, areas ->
-                    val current = Point(x, y)
+                    val current = Point2d(x, y)
                     areas.forEach { char ->
                         when (char) {
                             WALL -> newMap.get(current).add(char)
                             EMPTY -> {}
-                            BLIZZARD_UP -> moveBlizzard(BLIZZARD_UP, current + Point.UP, Point(x, height - 2))
-                            BLIZZARD_DOWN -> moveBlizzard(BLIZZARD_DOWN, current + Point.DOWN, Point(x, 1))
-                            BLIZZARD_RIGHT -> moveBlizzard(BLIZZARD_RIGHT, current + Point.RIGHT, Point(1, y))
-                            BLIZZARD_LEFT -> moveBlizzard(BLIZZARD_LEFT, current + Point.LEFT, Point(width - 2, y))
+                            BLIZZARD_UP -> moveBlizzard(BLIZZARD_UP, current + Point2d.UP, Point2d(x, height - 2))
+                            BLIZZARD_DOWN -> moveBlizzard(BLIZZARD_DOWN, current + Point2d.DOWN, Point2d(x, 1))
+                            BLIZZARD_RIGHT -> moveBlizzard(BLIZZARD_RIGHT, current + Point2d.RIGHT, Point2d(1, y))
+                            BLIZZARD_LEFT -> moveBlizzard(BLIZZARD_LEFT, current + Point2d.LEFT, Point2d(width - 2, y))
                         }
                     }
                 }
@@ -97,18 +97,18 @@ class Day24(input: String) : Puzzle<Int, Int>() {
             return newMap
         }
 
-        fun getPathTime(start: Point, end: Point): Pair<Int, PuzzleMap> {
-            var currentLocations: MutableMap<Point, Int> = mutableMapOf(start to 0)
+        fun getPathTime(start: Point2d, end: Point2d): Pair<Int, PuzzleMap> {
+            var currentLocations: MutableMap<Point2d, Int> = mutableMapOf(start to 0)
             var newMap = this
 
             while (!currentLocations.containsKey(end)) {
                 newMap = newMap.moveBlizzards()
-                val possibleMoves: MutableMap<Point, Int> = mutableMapOf()
+                val possibleMoves: MutableMap<Point2d, Int> = mutableMapOf()
 
                 // for every location we're in, wait, and move them
-                currentLocations.forEach { (location: Point, cost: Int) ->
+                currentLocations.forEach { (location: Point2d, cost: Int) ->
                     // wait, n, s, e, w
-                    listOf(Point.ZERO, Point.LEFT, Point.RIGHT, Point.UP, Point.DOWN).forEach { move ->
+                    listOf(Point2d.ZERO, Point2d.LEFT, Point2d.RIGHT, Point2d.UP, Point2d.DOWN).forEach { move ->
                         val new = location + move
                         if (new.isInside(this.width, this.height) &&
                             newMap._map[new.y][new.x].size == 1 &&

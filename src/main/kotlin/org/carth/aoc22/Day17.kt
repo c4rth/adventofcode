@@ -1,17 +1,17 @@
 package org.carth.aoc22
 
-import org.carth.common.Point
+import org.carth.common.Point2d
 import org.carth.common.Puzzle
 import kotlin.math.absoluteValue
 
 // https://github.com/tginsberg/advent-2022-kotlin/blob/main/src/main/kotlin/com/ginsberg/advent2022/Day17.kt
 class Day17(data: String) : Puzzle<Long, Long>() {
 
-    private val jets: List<Point> = parseJets(data)
-    private val shapes: List<Set<Point>> = generateShapes()
-    private val cave: MutableSet<Point> = (0..6).map { Point(it, 0) }.toMutableSet()
-    private val down: Point = Point(0, 1)
-    private val up: Point = Point(0, -1)
+    private val jets: List<Point2d> = parseJets(data)
+    private val shapes: List<Set<Point2d>> = generateShapes()
+    private val cave: MutableSet<Point2d> = (0..6).map { Point2d(it, 0) }.toMutableSet()
+    private val down: Point2d = Point2d(0, 1)
+    private val up: Point2d = Point2d(0, -1)
     private var jetCounter: Int = 0
     private var blockCounter: Int = 0
 
@@ -62,12 +62,12 @@ class Day17(data: String) : Puzzle<Long, Long>() {
         }
     }
 
-    private operator fun IntRange.contains(set: Set<Point>): Boolean = set.all { it.x in this }
-    private operator fun Set<Point>.times(point: Point): Set<Point> = map { it + point }.toSet()
-    private fun Set<Point>.minY(): Int = minOf { it.y }
-    private fun Set<Point>.height(): Int = minY().absoluteValue
+    private operator fun IntRange.contains(set: Set<Point2d>): Boolean = set.all { it.x in this }
+    private operator fun Set<Point2d>.times(point2d: Point2d): Set<Point2d> = map { it + point2d }.toSet()
+    private fun Set<Point2d>.minY(): Int = minOf { it.y }
+    private fun Set<Point2d>.height(): Int = minY().absoluteValue
 
-    private fun Set<Point>.normalizedCaveCeiling(): List<Int> =
+    private fun Set<Point2d>.normalizedCaveCeiling(): List<Int> =
         groupBy { it.x }
             .entries
             .sortedBy { it.key }
@@ -77,23 +77,23 @@ class Day17(data: String) : Puzzle<Long, Long>() {
                 it.map { point -> normalTo - point.y }
             }
 
-    private fun Set<Point>.moveToStart(ceilingHeight: Int): Set<Point> =
-        map { it + Point(2, ceilingHeight - 4) }.toSet()
+    private fun Set<Point2d>.moveToStart(ceilingHeight: Int): Set<Point2d> =
+        map { it + Point2d(2, ceilingHeight - 4) }.toSet()
 
-    private fun generateShapes(): List<Set<Point>> =
+    private fun generateShapes(): List<Set<Point2d>> =
         listOf(
-            setOf(Point(0, 0), Point(1, 0), Point(2, 0), Point(3, 0)),
-            setOf(Point(1, 0), Point(0, -1), Point(1, -1), Point(2, -1), Point(1, -2)),
-            setOf(Point(0, 0), Point(1, 0), Point(2, 0), Point(2, -1), Point(2, -2)),
-            setOf(Point(0, 0), Point(0, -1), Point(0, -2), Point(0, -3)),
-            setOf(Point(0, 0), Point(1, 0), Point(0, -1), Point(1, -1))
+            setOf(Point2d(0, 0), Point2d(1, 0), Point2d(2, 0), Point2d(3, 0)),
+            setOf(Point2d(1, 0), Point2d(0, -1), Point2d(1, -1), Point2d(2, -1), Point2d(1, -2)),
+            setOf(Point2d(0, 0), Point2d(1, 0), Point2d(2, 0), Point2d(2, -1), Point2d(2, -2)),
+            setOf(Point2d(0, 0), Point2d(0, -1), Point2d(0, -2), Point2d(0, -3)),
+            setOf(Point2d(0, 0), Point2d(1, 0), Point2d(0, -1), Point2d(1, -1))
         )
 
-    private fun parseJets(input: String): List<Point> =
+    private fun parseJets(input: String): List<Point2d> =
         input.map {
             when (it) {
-                '>' -> Point(1, 0)
-                '<' -> Point(-1, 0)
+                '>' -> Point2d(1, 0)
+                '<' -> Point2d(-1, 0)
                 else -> throw IllegalStateException("No such jet direction $it")
             }
         }

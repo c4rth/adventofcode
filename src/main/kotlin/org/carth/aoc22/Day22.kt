@@ -1,10 +1,10 @@
 package org.carth.aoc22
 
 import org.carth.common.Direction
-import org.carth.common.Point
+import org.carth.common.Point2d
 import org.carth.common.Puzzle
 
-typealias State = Pair<Direction, Point>
+typealias State = Pair<Direction, Point2d>
 
 class Day22(input: String) : Puzzle<Int, Int>() {
     private val data = input.lines()
@@ -23,7 +23,7 @@ class Day22(input: String) : Puzzle<Int, Int>() {
                 Direction.NORTH -> x = board[y].indexOfLast { it != ' ' }
                 Direction.WEST -> y = board.indexOfLast { x in it.indices && it[x] != ' ' }
             }
-            adjacencyMap[direction to pos] = direction to Point(x, y)
+            adjacencyMap[direction to pos] = direction to Point2d(x, y)
         }
         return solve(adjacencyMap)
     }
@@ -58,7 +58,7 @@ class Day22(input: String) : Puzzle<Int, Int>() {
     }
 
     fun solve(adjacencyMap: Map<State, State>): Int {
-        var pos = Point(board[0].indexOf('.'), 0)
+        var pos = Point2d(board[0].indexOf('.'), 0)
         var dir = Direction.SOUTH
         for (move in moves) {
             when (move) {
@@ -75,17 +75,17 @@ class Day22(input: String) : Puzzle<Int, Int>() {
         return 1000 * (pos.y + 1) + 4 * (pos.x + 1) + dir.value
     }
 
-    private fun Point.move(direction: Direction) = when (direction) {
-        Direction.SOUTH -> Point(x + 1, y)
-        Direction.EAST -> Point(x, y + 1)
-        Direction.NORTH -> Point(x - 1, y)
-        Direction.WEST -> Point(x, y - 1)
+    private fun Point2d.move(direction: Direction) = when (direction) {
+        Direction.SOUTH -> Point2d(x + 1, y)
+        Direction.EAST -> Point2d(x, y + 1)
+        Direction.NORTH -> Point2d(x - 1, y)
+        Direction.WEST -> Point2d(x, y - 1)
     }
 
-    operator fun List<String>.get(pos: Point): Char = getOrNull(pos.y)?.getOrNull(pos.x) ?: ' '
+    operator fun List<String>.get(pos: Point2d): Char = getOrNull(pos.y)?.getOrNull(pos.x) ?: ' '
 
     private fun getPerimeter(board: List<String>): List<State> {
-        val initialPos = Point(board[0].indexOf('.'), 0)
+        val initialPos = Point2d(board[0].indexOf('.'), 0)
         return buildList {
             var pos = initialPos
             var dir = Direction.SOUTH

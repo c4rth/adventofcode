@@ -1,6 +1,6 @@
 package org.carth.aoc22
 
-import org.carth.common.Point
+import org.carth.common.Point2d
 import org.carth.common.Puzzle
 import kotlin.math.abs
 import kotlin.math.max
@@ -30,14 +30,14 @@ class Day15(input: String) : Puzzle<Int, Int>() {
         return 0
     }
 
-    private fun parse(): List<Triple<Point, Point, Int>> {
+    private fun parse(): List<Triple<Point2d, Point2d, Int>> {
         return data.map { line ->
             line.split("Sensor at x=", ", y=", ": closest beacon is at x=", ", y=")
                 .drop(1)
                 .map { it.toInt() }
         }.map { (sx, sy, bx, by) ->
-            val sensor = Point(sx, sy)
-            val beacon = Point(bx, by)
+            val sensor = Point2d(sx, sy)
+            val beacon = Point2d(bx, by)
             Triple(sensor, beacon, sensor.manhattan(beacon))
         }
     }

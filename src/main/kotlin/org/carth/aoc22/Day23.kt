@@ -1,6 +1,6 @@
 package org.carth.aoc22
 
-import org.carth.common.Point
+import org.carth.common.Point2d
 import org.carth.common.Puzzle
 
 
@@ -27,8 +27,8 @@ class Day23(input: String) : Puzzle<Int, Int>() {
         return count
     }
 
-    private fun run(): MutableMap<Point, MutableList<Point>> {
-        val moves: MutableMap<Point, MutableList<Point>> = mutableMapOf()
+    private fun run(): MutableMap<Point2d, MutableList<Point2d>> {
+        val moves: MutableMap<Point2d, MutableList<Point2d>> = mutableMapOf()
         // possible moves
         elves.forEach { elf ->
             getPossibleMove(elf)?.let { next ->
@@ -46,7 +46,7 @@ class Day23(input: String) : Puzzle<Int, Int>() {
         return moves
     }
 
-    private fun getPossibleMove(elf: Point): Point? {
+    private fun getPossibleMove(elf: Point2d): Point2d? {
         val hasNeighbors = elf.adjacents().any { it in elves }
         if (hasNeighbors)
             directions.forEach { dir ->
@@ -71,11 +71,11 @@ class Day23(input: String) : Puzzle<Int, Int>() {
         return (max.x - min.x + 1) * (max.y - min.y + 1) - elves.size
     }
 
-    private fun parse(): MutableSet<Point> {
+    private fun parse(): MutableSet<Point2d> {
         return data.mapIndexed { row, line ->
             line.mapIndexed { col, c ->
                 if (c == '#')
-                    Point(col, row)
+                    Point2d(col, row)
                 else
                     null
             }
@@ -88,10 +88,10 @@ class Day23(input: String) : Puzzle<Int, Int>() {
 
     companion object {
         private val adjacents = mutableMapOf(
-            Direction.N to listOf(Point.NW, Point.N, Point.NE),
-            Direction.E to listOf(Point.NE, Point.E, Point.SE),
-            Direction.S to listOf(Point.SW, Point.S, Point.SE),
-            Direction.W to listOf(Point.NW, Point.W, Point.SW)
+            Direction.N to listOf(Point2d.NW, Point2d.N, Point2d.NE),
+            Direction.E to listOf(Point2d.NE, Point2d.E, Point2d.SE),
+            Direction.S to listOf(Point2d.SW, Point2d.S, Point2d.SE),
+            Direction.W to listOf(Point2d.NW, Point2d.W, Point2d.SW)
         )
     }
 }

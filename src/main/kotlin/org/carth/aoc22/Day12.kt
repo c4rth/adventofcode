@@ -1,6 +1,6 @@
 package org.carth.aoc22
 
-import org.carth.common.Point
+import org.carth.common.Point2d
 import org.carth.common.Puzzle
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath
 import org.jgrapht.graph.DefaultDirectedGraph
@@ -26,7 +26,7 @@ class Day12(input: String) : Puzzle<Int, Int>() {
         data.forEachIndexed { y, line ->
             line.forEachIndexed { x, char ->
                 if (char == 'a' || char == 'S') {
-                    val shortestPath = dijkstraShortestPath.getPath(Point(x, y), end)
+                    val shortestPath = dijkstraShortestPath.getPath(Point2d(x, y), end)
                     if (shortestPath != null) {
                         paths.add(shortestPath.edgeList.size)
                     }
@@ -36,15 +36,15 @@ class Day12(input: String) : Puzzle<Int, Int>() {
         return paths.min()
     }
 
-    private fun getStartEnd(): Pair<Point, Point> {
-        var start: Point? = null
-        var end: Point? = null
+    private fun getStartEnd(): Pair<Point2d, Point2d> {
+        var start: Point2d? = null
+        var end: Point2d? = null
         data.forEachIndexed { y, line ->
             line.forEachIndexed { x, char ->
                 if (char == 'S') {
-                    start = Point(x, y)
+                    start = Point2d(x, y)
                 } else if (char == 'E') {
-                    end = Point(x, y)
+                    end = Point2d(x, y)
                 }
                 if (start != null && end != null) return start!! to end!!
             }
@@ -54,18 +54,18 @@ class Day12(input: String) : Puzzle<Int, Int>() {
 
     private fun Char.value(): Int = if (this == 'S') 'a'.code else if (this == 'E') 'z'.code else code
 
-    private fun List<String>.get(point: Point): Char = this[point.y][point.x]
+    private fun List<String>.get(point2d: Point2d): Char = this[point2d.y][point2d.x]
 
-    private fun parseGraph(): DefaultDirectedGraph<Point, DefaultEdge> {
+    private fun parseGraph(): DefaultDirectedGraph<Point2d, DefaultEdge> {
         val width = data[0].length
         val height = data.size
-        val graph = DefaultDirectedGraph<Point, DefaultEdge>(DefaultEdge::class.java)
-        val arounds = arrayOf(Point(1, 0), Point(-1, 0), Point(0, 1), Point(0, -1))
+        val graph = DefaultDirectedGraph<Point2d, DefaultEdge>(DefaultEdge::class.java)
+        val arounds = arrayOf(Point2d(1, 0), Point2d(-1, 0), Point2d(0, 1), Point2d(0, -1))
         data.forEachIndexed { y, line ->
             line.forEachIndexed { x, char ->
-                val from = Point(x, y)
+                val from = Point2d(x, y)
                 for (around in arounds) {
-                    val to = Point(x, y) + around
+                    val to = Point2d(x, y) + around
                     if (to.isInside(width, height)) {
                         if (data.get(to).value() - char.value() <= 1) {
                             graph.addVertex(from)
