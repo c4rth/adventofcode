@@ -30,7 +30,7 @@ abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
             ?: throw IllegalArgumentException("Cannot find Resource: $this")
 
     private fun getFilename(type: Type, suffix: String = ""): String =
-        "aoc$year/$day/${type.toString().lowercase(Locale.getDefault())}$suffix.txt"
+        "$day/${type.toString().lowercase(Locale.getDefault())}$suffix.txt"
 
     fun readInput(type: Type, suffix: String = ""): String = File(getFilename(type, suffix).toURI()).readText()
 
