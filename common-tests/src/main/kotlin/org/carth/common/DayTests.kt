@@ -21,8 +21,6 @@ abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
         ONE, TWO
     }
 
-
-    private val year: String = this.javaClass.`package`.name.takeLast(2)
     private val day: String = this.javaClass.simpleName.take(5).lowercase(Locale.getDefault())
 
     private fun String.toURI() =
