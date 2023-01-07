@@ -29,14 +29,14 @@ class Day19(input: String) : Puzzle<Int, Int>() {
     class Rule(line: String) {
         val id: Int
         private val value: Char?
-        private val rules: List<List<Int>>
+        private val rules: List<List<Int>>?
 
         init {
             id = line.substringBefore(":").toInt()
             val v = line.substringAfter(": ")
             if (v.startsWith("\"")) {
                 value = v[1]
-                rules = emptyList()
+                rules = null
             } else {
                 value = null
                 rules = v.split(" | ").map { rule ->
@@ -48,7 +48,7 @@ class Day19(input: String) : Puzzle<Int, Int>() {
         fun toRegExp(allRules: Map<Int, Rule>): String {
             if (value != null) return value.toString()
             var str = "("
-            rules.forEachIndexed { index, orRules ->
+            rules!!.forEachIndexed { index, orRules ->
                 orRules.forEach { andRule ->
                     str += allRules[andRule]?.toRegExp(allRules)
                 }
