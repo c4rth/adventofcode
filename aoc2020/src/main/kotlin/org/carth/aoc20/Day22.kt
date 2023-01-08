@@ -29,7 +29,7 @@ class Day22(input: String) : Puzzle<Int, Int>() {
         while (player1.hasCards() && player2.hasCards()) {
             val card1 = player1.pickCard()
             val card2 = player2.pickCard()
-            val winner1 = if (player1.machSize(card1) && player2.machSize(card2)) {
+            val winner1 = if (player1.matchSize(card1) && player2.matchSize(card2)) {
                 play(Player(player1.getCards(card1)), Player(player2.getCards(card2)))
             } else {
                 card1 > card2
@@ -54,7 +54,7 @@ class Day22(input: String) : Puzzle<Int, Int>() {
 
         fun getCards(number: Int) = cards.take(number).toMutableList()
 
-        fun machSize(card: Int) = card <= cards.size
+        fun matchSize(card: Int) = card <= cards.size
 
         fun score(): Int = cards.foldIndexed(0) { index, acc, card -> acc + (card * (cards.size - index)) }
     }
