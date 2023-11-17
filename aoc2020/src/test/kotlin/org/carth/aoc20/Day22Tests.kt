@@ -18,5 +18,5 @@ class Day22Tests : DayTests<Day22>(Day22::class) {
 
     @Test
     @Order(4)
-    fun solvePartTwo() = solve(Part.TWO, Type.INPUT, expected = 0)
+    fun solvePartTwo() = solve(Part.TWO, Type.INPUT, expected = 31587)
 }
