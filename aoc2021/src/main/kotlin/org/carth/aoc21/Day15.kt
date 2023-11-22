@@ -1,7 +1,7 @@
 package org.carth.aoc21
 
 import org.carth.common.Puzzle
-import java.util.*
+import java.util.PriorityQueue
 
 
 class Day15(input: String) : Puzzle<Int, Int>() {

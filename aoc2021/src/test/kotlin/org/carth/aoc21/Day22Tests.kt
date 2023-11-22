@@ -1,7 +1,8 @@
 package org.carth.aoc21
 
 import org.carth.common.DayTests
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.Test
 
 
 class Day22Tests : DayTests<Day22>(Day22::class) {

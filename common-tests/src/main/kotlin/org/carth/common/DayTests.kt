@@ -1,17 +1,19 @@
 package org.carth.common
 
-import org.junit.jupiter.api.Assertions
+import mu.KotlinLogging
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.TestMethodOrder
-import org.junit.jupiter.api.extension.ExtendWith
 import java.io.File
-import java.util.*
+import java.util.Locale
 import kotlin.reflect.KClass
 import kotlin.reflect.full.primaryConstructor
+import kotlin.test.assertEquals
+import kotlin.time.measureTimedValue
 
-@ExtendWith(TimingExtension::class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
+
+    private val logger = KotlinLogging.logger {}
 
     enum class Type {
         TEST, INPUT
@@ -34,10 +36,19 @@ abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
 
     private fun getInstance(data: String): T = clazz.primaryConstructor!!.call(data)
 
+    private fun functionNameWithStackWalker(): String? {
+        return StackWalker.getInstance().walk { frames ->
+            frames.filter { it.methodName.startsWith("solvePart") }.findFirst().map { it.methodName }.orElse(null)
+        }
+    }
+
     fun solve(part: Part, type: Type, suffix: String = "", expected: Any) {
         val input = readInput(type, suffix)
-        val answer = if (part == Part.ONE) getInstance(input).solvePartOne() else getInstance(input).solvePartTwo()
-        Assertions.assertEquals(expected, answer)
+        val (answer, duration) = measureTimedValue {
+            if (part == Part.ONE) getInstance(input).solvePartOne() else getInstance(input).solvePartTwo()
+        }
+        logger.info { String.format("Part [%s] [%s] took %s ms.", part, functionNameWithStackWalker(), duration.inWholeMilliseconds) }
+        assertEquals(expected, answer)
     }
 
 
