@@ -1,0 +1,11 @@
+product:
+  type: lib
+  platforms: [jvm]
+
+dependencies:
+  - org.jetbrains.kotlinx:multik-api:0.1.1:
+      exported: true
+  - org.jetbrains.kotlinx:multik-default:0.2.2:
+      exported: true
+  - org.jgrapht:jgrapht-core:1.5.2:
+      exported: true

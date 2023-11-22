@@ -1,0 +1,7 @@
+product:
+  type: lib
+  platforms: [jvm]
+
+settings:
+  kotlin:
+    languageVersion: 1.9

@@ -1,0 +1,12 @@
+product:
+  type: lib
+  platforms: [jvm]
+
+dependencies:
+  - ../common
+
+test-dependencies:
+  - ../common-tests
+
+test-settings:
+  junit: junit-5
