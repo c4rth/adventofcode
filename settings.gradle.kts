@@ -2,7 +2,6 @@ pluginManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()
-        // add repositories:
         google()
         maven("https://maven.pkg.jetbrains.space/public/p/amper/amper")
     }
@@ -10,7 +9,7 @@ pluginManagement {
 
 plugins {
     // apply the plugin:
-    id("org.jetbrains.amper.settings.plugin").version("0.1.0")
+    id("org.jetbrains.amper.settings.plugin").version("0.1.1")
 }
 
 rootProject.name = "adventofcode"
