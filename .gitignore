@@ -1,3 +1,4 @@
 .gradle
+!.idea/fileTemplates/**
 .idea
 build
