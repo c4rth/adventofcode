@@ -2,7 +2,6 @@ package org.carth.common
 
 import mu.KotlinLogging
 import org.junit.jupiter.api.MethodOrderer
-import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.TestMethodOrder
 import java.io.File
 import java.util.Locale
