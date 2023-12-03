@@ -1,8 +1,8 @@
-package org.carth.${PackageName}
+package org.carth.aoc2023
 
 import org.carth.common.Puzzle
 
-class ${NAME}(input: String) : Puzzle<Int, Int>() {
+class Day04(input: String) : Puzzle<Int, Int>() {
 
     private val data = input.split(System.lineSeparator())
 

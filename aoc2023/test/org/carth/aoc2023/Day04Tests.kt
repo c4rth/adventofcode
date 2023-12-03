@@ -1,10 +1,10 @@
-package org.carth.${PackageName}
+package org.carth.aoc2023
 
 import org.carth.common.DayTests
 import org.junit.jupiter.api.Order
 import kotlin.test.Test
 
-class ${NAME}Tests : DayTests<${NAME}>(${NAME}::class) {
+class Day04Tests : DayTests<Day04>(Day04::class) {
     @Test
     @Order(1)
     fun solvePartOneSample() = solve(Part.ONE, Type.TEST, expected = 1)
