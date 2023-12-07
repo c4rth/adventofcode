@@ -1,6 +1,7 @@
 package org.carth.aoc2023
 
 import org.carth.common.DayTests
+import org.carth.common.Part
 import org.junit.jupiter.api.Order
 import kotlin.test.Test
 

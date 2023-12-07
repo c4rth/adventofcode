@@ -19,10 +19,6 @@ abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
         TEST, INPUT
     }
 
-    enum class Part {
-        ONE, TWO
-    }
-
     private val day: String = this.javaClass.simpleName.take(5).lowercase(Locale.getDefault())
 
     private fun String.toURI() =
