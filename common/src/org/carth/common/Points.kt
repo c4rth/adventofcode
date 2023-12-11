@@ -19,6 +19,8 @@ data class Point2d(val x: Int, val y: Int) : Point<Point2d> {
 
     override fun adjacent() = setOf(this + N, this + NE, this + NW, this + S, this + SE, this + SW, this + W, this + E)
 
+    fun cardinalAdjacent() = setOf(this + N, this + S, this + W, this + E)
+
     fun min(other: Point2d) = Point2d(min(this.x, other.x), min(this.y, other.y))
     fun max(other: Point2d) = Point2d(max(this.x, other.x), max(this.y, other.y))
 
