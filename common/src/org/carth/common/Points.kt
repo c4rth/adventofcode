@@ -9,6 +9,7 @@ interface Point<T> {
     fun adjacent(): Set<T>
 }
 
+@Suppress("unused")
 data class Point2d(val x: Int, val y: Int) : Point<Point2d> {
     operator fun plus(p: Point2d) = Point2d(x + p.x, y + p.y)
     operator fun minus(p: Point2d) = Point2d(x - p.x, y - p.y)

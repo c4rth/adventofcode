@@ -1,5 +1,6 @@
 package org.carth.common
 
+@Suppress("unused")
 class GridString(input: String) {
     val lines = input.split(System.lineSeparator())
     val width = lines[0].length
