@@ -1,7 +1,10 @@
 package org.carth.aoc2023
 
-import org.carth.common.*
-
+import org.carth.common.Direction
+import org.carth.common.GridBoolean
+import org.carth.common.GridChar
+import org.carth.common.Point2d
+import org.carth.common.Puzzle
 
 class Day16(input: String) : Puzzle<Int, Int>() {
 
@@ -26,7 +29,7 @@ class Day16(input: String) : Puzzle<Int, Int>() {
 
     private fun moveBeam(start: Point2d, startDir: Direction): Int {
         var beams = mutableSetOf<Beam>()
-        val seen = mutableSetOf<Beam>()
+        val pointsSeen = mutableSetOf<Beam>()
         val energized = GridBoolean(grid.width, grid.height)
         beams.add(Beam(start, startDir))
         while (beams.size > 0) {
@@ -47,8 +50,8 @@ class Day16(input: String) : Puzzle<Int, Int>() {
                     newBeams.addAll(newDirs.map { Beam(newPoint, it) })
                 }
             }
-            newBeams.removeAll(seen)
-            seen.addAll(newBeams)
+            newBeams.removeAll(pointsSeen)
+            pointsSeen.addAll(newBeams)
             beams = newBeams
         }
         return energized.lines.sumOf { line -> line.map { if (it) 1 else 0 }.sum() }
