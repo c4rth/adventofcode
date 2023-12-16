@@ -1,12 +1,12 @@
 package org.carth.aoc2023
 
-import org.carth.common.GridString
+import org.carth.common.GridChar
 import org.carth.common.Point2d
 import org.carth.common.Puzzle
 
 class Day03(data: String) : Puzzle<Long, Long>() {
 
-    private val grid = GridString(data)
+    private val grid = GridChar(data)
 
     override fun solvePartOne(): Long {
         val pointNumbers = emptyMap<Point2d, Long>().toMutableMap()
@@ -47,7 +47,7 @@ class Day03(data: String) : Puzzle<Long, Long>() {
     }
 
     private fun getPointAndNumber(p: Point2d): Pair<Point2d, Long> {
-        val line = " " + grid[p.y] + " "
+        val line = " " + grid[p.y].joinToString("") + " "
         var startC = p.x + 1
         while (line[startC - 1].isDigit()) startC -= 1
         var endC = p.x + 2

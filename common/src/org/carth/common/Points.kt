@@ -16,6 +16,8 @@ data class Point2d(val x: Int, val y: Int) : Point<Point2d> {
     fun isInside(width: Int, height: Int): Boolean =
         (x in 0 until width) && (y in 0 until height)
 
+    fun isInside(grid: Grid): Boolean = (x in grid.widthIndices) && (y in grid.heightIndices)
+
     fun manhattan(other: Point2d) = abs(x - other.x) + abs(y - other.y)
 
     override fun adjacent() = setOf(this + N, this + NE, this + NW, this + S, this + SE, this + SW, this + W, this + E)
@@ -42,7 +44,6 @@ data class Point2d(val x: Int, val y: Int) : Point<Point2d> {
         val E = Point2d(1, 0)
     }
 }
-
 
 data class Point3d(val x: Int, val y: Int, val z: Int) : Point<Point3d>, Comparable<Point3d> {
     fun directAdjacent() = listOf(

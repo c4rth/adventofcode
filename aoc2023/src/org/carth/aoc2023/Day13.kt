@@ -1,11 +1,11 @@
 package org.carth.aoc2023
 
-import org.carth.common.GridString
+import org.carth.common.GridChar
 import org.carth.common.Puzzle
 
 class Day13(input: String) : Puzzle<Int, Int>() {
 
-    private val patterns = input.split(System.lineSeparator() + System.lineSeparator()).map { GridString(it) }
+    private val patterns = input.split(System.lineSeparator() + System.lineSeparator()).map { GridChar(it) }
 
     override fun solvePartOne(): Int {
         return patterns.sumOf {
@@ -23,7 +23,7 @@ class Day13(input: String) : Puzzle<Int, Int>() {
         }
     }
 
-    private fun findHorizontalSeparator(pattern: GridString, smudge: Int = 0): Int {
+    private fun findHorizontalSeparator(pattern: GridChar, smudge: Int = 0): Int {
         var line = 0
         for (size in 1..<pattern.height) {
             val part1 = pattern.take(size).asReversed()
@@ -39,7 +39,7 @@ class Day13(input: String) : Puzzle<Int, Int>() {
         return line
     }
 
-    private fun findVerticalSeparator(pattern: GridString, smudge: Int = 0): Int {
+    private fun findVerticalSeparator(pattern: GridChar, smudge: Int = 0): Int {
         return findHorizontalSeparator(pattern.rotate(), smudge)
     }
 

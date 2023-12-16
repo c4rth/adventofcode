@@ -1,11 +1,11 @@
 package org.carth.aoc2023
 
-import org.carth.common.MutableGridString
+import org.carth.common.GridChar
 import org.carth.common.Puzzle
 
 class Day14(input: String) : Puzzle<Int, Int>() {
 
-    private val grid = MutableGridString(input)
+    private val grid = GridChar(input)
     private val width = grid.width
     private val height = grid.height
 
