@@ -1,7 +1,6 @@
 package org.carth.common
 
-import mu.KotlinLogging
-
+import io.github.oshai.kotlinlogging.KotlinLogging
 
 enum class Part {
     ONE, TWO

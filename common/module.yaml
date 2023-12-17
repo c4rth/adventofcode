@@ -3,12 +3,6 @@ product:
   platforms: [jvm]
 
 dependencies:
-  - org.jetbrains.kotlinx:multik-api:0.1.1:
-      exported: true
-  - org.jetbrains.kotlinx:multik-default:0.2.2:
-      exported: true
-  - org.jgrapht:jgrapht-core:1.5.2:
-      exported: true
-  - io.github.microutils:kotlin-logging-jvm:3.0.5:
-      exported: true
+  - org.jetbrains.kotlinx:multik-default:0.2.2: exported
+  - io.github.oshai:kotlin-logging-jvm:5.1.0: exported
   - org.slf4j:slf4j-simple:2.0.9
