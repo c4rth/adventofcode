@@ -13,6 +13,7 @@ interface Point<T> {
 data class Point2d(val x: Int, val y: Int) : Point<Point2d> {
     operator fun plus(p: Point2d) = Point2d(x + p.x, y + p.y)
     operator fun minus(p: Point2d) = Point2d(x - p.x, y - p.y)
+    operator fun times(n: Int) = Point2d(x * n, y * n)
     fun isInside(width: Int, height: Int): Boolean =
         (x in 0 until width) && (y in 0 until height)
 

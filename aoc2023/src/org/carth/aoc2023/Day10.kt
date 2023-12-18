@@ -2,7 +2,7 @@ package org.carth.aoc2023
 
 import org.carth.common.Point2d
 import org.carth.common.Puzzle
-import kotlin.math.abs
+import org.carth.common.shoelaceArea
 
 class Day10(private val input: String) : Puzzle<Int, Int>() {
 
@@ -40,18 +40,9 @@ class Day10(private val input: String) : Puzzle<Int, Int>() {
         return points.size / 2
     }
 
-    private fun shoelaceArea(points: List<Point2d>): Int {
-        val length = points.size
-        var acc = 0
-        for (i in 0 until length - 1) {
-            acc += points[i].x * points[i + 1].y - points[i + 1].x * points[i].y
-        }
-        return abs(acc + points[length - 1].x * points[0].y - points[0].x * points[length - 1].y) / 2
-    }
-
     override fun solvePartTwo(): Int {
         val points = getPoints()
-        return shoelaceArea(points) - (points.size / 2) + 1
+        return points.shoelaceArea().toInt() - (points.size / 2) + 1
     }
 
 }
