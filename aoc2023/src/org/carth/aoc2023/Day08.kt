@@ -1,6 +1,7 @@
 package org.carth.aoc2023
 
 import org.carth.common.Puzzle
+import org.carth.common.lcm
 
 class Day08(input: String) : Puzzle<Int, Long>() {
 
@@ -41,18 +42,6 @@ class Day08(input: String) : Puzzle<Int, Long>() {
             step.toLong()
         }
         return lcm(steps)
-    }
-
-    private fun lcm(a: Long, b: Long): Long {
-        return a / gcd(a, b) * b
-    }
-
-    private fun gcd(a: Long, b: Long): Long {
-        return if (b == 0L) a else gcd(b, a % b)
-    }
-
-    private fun lcm(input: List<Long>): Long {
-        return input.reduce { acc, l -> lcm(acc, l) }
     }
 
     data class Node(val left: String, val right: String)

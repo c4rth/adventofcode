@@ -47,6 +47,9 @@ data class Point2d(val x: Int, val y: Int) : Point<Point2d> {
 }
 
 data class Point3d(val x: Int, val y: Int, val z: Int) : Point<Point3d>, Comparable<Point3d> {
+
+    constructor(xyz: List<String>): this(xyz[0].toInt(), xyz[1].toInt(), xyz[2].toInt())
+
     fun directAdjacent() = listOf(
         Point3d(x + 1, y, z),
         Point3d(x - 1, y, z),

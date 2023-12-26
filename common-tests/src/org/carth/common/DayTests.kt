@@ -4,7 +4,7 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.TestMethodOrder
 import java.io.File
-import java.util.Locale
+import java.util.*
 import kotlin.reflect.KClass
 import kotlin.reflect.full.primaryConstructor
 import kotlin.test.assertEquals
@@ -38,11 +38,15 @@ abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
         }
     }
 
-    fun solve(part: Part, type: Type, suffix: String = "", expected: Any) {
-        val input =  readInput(type, suffix)
-        val instance =  getInstance(input)
+    fun solve(part: Part, type: Type, suffix: String = "", args: List<Any> = emptyList(), expected: Any) {
+        val input = readInput(type, suffix)
+        val instance = getInstance(input)
+        instance.args = args
         val (answer, durationExecution) = measureTimedValue {
-            if (part == Part.ONE) instance.solvePartOne() else instance.solvePartTwo()
+            if (part == Part.ONE)
+                instance.solvePartOne()
+            else
+                instance.solvePartTwo()
         }
         logger.info { "Part [$part] : ${functionNameWithStackWalker()} - ${durationExecution.inWholeMilliseconds} ms." }
         assertEquals(expected, answer)
