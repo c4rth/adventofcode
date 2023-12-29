@@ -30,9 +30,9 @@ class Day20(input: String) : Puzzle<Long, Long>() {
     override fun solvePartOne(): Long {
         var highCount = 0L
         var lowCount = 0L
-        val steps = ArrayDeque<Step>()
-        steps.add(Step("aptly", Pulse.LOW, allModules.getValue("broadcaster")))
         repeat(1000) {
+            val steps = ArrayDeque<Step>()
+            steps.add(Step("aptly", Pulse.LOW, allModules.getValue("broadcaster")))
             while (steps.isNotEmpty()) {
                 val (source, pulse, target) = steps.removeFirst()
                 if (pulse == Pulse.HIGH) highCount++ else lowCount++
@@ -45,24 +45,6 @@ class Day20(input: String) : Puzzle<Long, Long>() {
     }
 
     override fun solvePartTwo(): Long {
-        /*
-        var presses = 1L
-        val steps = ArrayDeque<Step>()
-        while (true) {
-            steps.add(Step("aptly", Pulse.LOW, allModules.getValue("broadcaster")))
-            while (steps.isNotEmpty()) {
-                val (source, pulse, target) = steps.removeFirst()
-                if (target.key == "rx" && pulse == Pulse.LOW) {
-                    return presses
-                }
-                val res = target.sendPulse(source, pulse)
-                for ((newPulse, newTarget) in res)
-                    steps.add(Step(target.key, newPulse, allModules[newTarget] ?: Untyped(newTarget)))
-                presses++
-            }
-        }
-        return 0L*/
-
         val rxSource = allModules.values.single { "rx" in it.modules }.key
         val interesting = allModules.values.filter { rxSource in it.modules }.map { it.key }
         val occurrences = interesting.associateWith { arrayListOf<Long>() }
