@@ -22,7 +22,7 @@ class Day24(input: String) : Puzzle<Long, BigInteger>() {
 
     override fun solvePartOne(): Long {
         var total = 0L
-        val range = args[0] as ClosedFloatingPointRange<Double>
+        val range = args[0] as Double..args[1] as Double
         for (idx1 in hails.indices) {
             val hail1 = hails[idx1]
             for (idx2 in idx1 + 1..<hails.size) {
