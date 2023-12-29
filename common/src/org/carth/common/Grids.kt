@@ -46,7 +46,9 @@ class GridChar(val lines: List<CharArray>) : Grid {
 
     fun adjacent(x: Int, y: Int) = adjacent(Point2d(x, y))
 
-    fun cardinalAdjacent(point: Point2d) = point.cardinalAdjacent().filter { it.x >= 0 && it.y >= 0 && it.x < width && it.y < height }
+    fun cardinalAdjacent(point: Point2d) =
+        point.cardinalAdjacent().filter { it.x >= 0 && it.y >= 0 && it.x < width && it.y < height }
+
     fun adjacent(point: Point2d) = point.adjacent().filter { it.x >= 0 && it.y >= 0 && it.x < width && it.y < height }
 
     fun rotate() = GridChar(List(lines.first().size) { i -> lines.joinToString("") { it[i].toString() }.toCharArray() })
@@ -101,6 +103,11 @@ class InfiniteGridChar(val lines: List<CharArray>) : Grid {
 class GridInt(val lines: List<IntArray>) : Grid {
 
     constructor(width: Int, height: Int) : this(Array(height) { IntArray(width) }.toList())
+    constructor(
+        width: Int,
+        height: Int,
+        init: (Int) -> Int
+    ) : this(Array(height) { IntArray(width) { init(it) } }.toList())
 
     override val width = lines[0].size
     override val height = lines.size
@@ -121,6 +128,37 @@ class GridInt(val lines: List<IntArray>) : Grid {
 
     override fun isInside(point: Point2d) = (point.x in 0 until width) && (point.y in 0 until height)
 
+    fun sumOf(selector: (Long) -> Long): Long {
+        var total = 0L
+        for (line in lines) {
+            for (i in line) {
+                val l = selector(i.toLong())
+                total += l
+            }
+        }
+        return total
+    }
+
+    fun count(predicate: (Int) -> Boolean): Int {
+        var count = 0
+        for (line in this.lines)
+            for (element in line)
+                if (predicate(element)) ++count
+        return count
+    }
+
+    fun any(predicate: (Int) -> Boolean): Boolean {
+        for (line in this.lines)
+            for (element in line)
+                if (predicate(element)) return true
+        return false
+    }
+
+    fun withIndex(): Iterable<Pair<Point2d,Int>> {
+        return lines.mapIndexed { y, line ->
+            line.mapIndexed { x, i -> Point2d(x,y) to i }
+        }.flatten()
+    }
 }
 
 @Suppress("unused")
