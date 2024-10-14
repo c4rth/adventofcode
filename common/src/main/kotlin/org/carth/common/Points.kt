@@ -6,18 +6,24 @@ import kotlin.math.min
 
 interface Point<T> {
 
-    fun adjacents(): Set<T>
+    fun adjacent(): Set<T>
 }
 
+@Suppress("unused")
 data class Point2d(val x: Int, val y: Int) : Point<Point2d> {
     operator fun plus(p: Point2d) = Point2d(x + p.x, y + p.y)
     operator fun minus(p: Point2d) = Point2d(x - p.x, y - p.y)
+    operator fun times(n: Int) = Point2d(x * n, y * n)
     fun isInside(width: Int, height: Int): Boolean =
         (x in 0 until width) && (y in 0 until height)
 
+    fun isInside(grid: Grid): Boolean = (x in grid.widthIndices) && (y in grid.heightIndices)
+
     fun manhattan(other: Point2d) = abs(x - other.x) + abs(y - other.y)
 
-    override fun adjacents() = setOf(this + N, this + NE, this + NW, this + S, this + SE, this + SW, this + W, this + E)
+    override fun adjacent() = setOf(this + N, this + NE, this + NW, this + S, this + SE, this + SW, this + W, this + E)
+
+    fun cardinalAdjacent() = setOf(this + N, this + S, this + W, this + E)
 
     fun min(other: Point2d) = Point2d(min(this.x, other.x), min(this.y, other.y))
     fun max(other: Point2d) = Point2d(max(this.x, other.x), max(this.y, other.y))
@@ -40,9 +46,11 @@ data class Point2d(val x: Int, val y: Int) : Point<Point2d> {
     }
 }
 
-
 data class Point3d(val x: Int, val y: Int, val z: Int) : Point<Point3d>, Comparable<Point3d> {
-    fun directAdjacents() = listOf(
+
+    constructor(xyz: List<String>): this(xyz[0].toInt(), xyz[1].toInt(), xyz[2].toInt())
+
+    fun directAdjacent() = listOf(
         Point3d(x + 1, y, z),
         Point3d(x - 1, y, z),
         Point3d(x, y + 1, z),
@@ -51,7 +59,7 @@ data class Point3d(val x: Int, val y: Int, val z: Int) : Point<Point3d>, Compara
         Point3d(x, y, z - 1)
     )
 
-    override fun adjacents() =
+    override fun adjacent() =
         (x - 1..x + 1).flatMap { dx ->
             (y - 1..y + 1).flatMap { dy ->
                 (z - 1..z + 1).mapNotNull { dz ->
@@ -103,7 +111,7 @@ data class Point3d(val x: Int, val y: Int, val z: Int) : Point<Point3d>, Compara
 
 data class Point4d(val x: Int, val y: Int, val z: Int, val w: Int) : Point<Point4d> {
 
-    override fun adjacents() =
+    override fun adjacent() =
         (x - 1..x + 1).flatMap { dx ->
             (y - 1..y + 1).flatMap { dy ->
                 (z - 1..z + 1).flatMap { dz ->

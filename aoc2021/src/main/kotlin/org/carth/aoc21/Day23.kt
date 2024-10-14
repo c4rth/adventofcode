@@ -1,7 +1,7 @@
 package org.carth.aoc21
 
 import org.carth.common.Puzzle
-import java.util.*
+import java.util.PriorityQueue
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min

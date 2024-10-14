@@ -33,12 +33,12 @@ class Day17(input: String) : Puzzle<Int, Int>() {
         repeat(6) {
             val newGrid = grid.toMutableMap()
             grid.keys.forEach { point ->
-                point.adjacents().forEach { adj ->
+                point.adjacent().forEach { adj ->
                     newGrid.putIfAbsent(adj, false)
                 }
             }
             newGrid.entries.forEach { (point, active) ->
-                val count = point.adjacents().count { adj -> grid.getOrDefault(adj, false) }
+                val count = point.adjacent().count { adj -> grid.getOrDefault(adj, false) }
                 newGrid[point] = when {
                     active && count in setOf(2, 3) -> true
                     !active && count == 3 -> true

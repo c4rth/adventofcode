@@ -1,7 +1,7 @@
 package org.carth.aoc22
 
 import org.carth.common.Puzzle
-import java.util.*
+import java.util.Stack
 
 typealias Crates = Stack<Char>
 

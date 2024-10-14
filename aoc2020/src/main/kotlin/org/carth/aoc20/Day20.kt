@@ -81,7 +81,7 @@ class Day20(input: String) : Puzzle<Long, Int>() {
 
     private class Tile(val id: Long, var body: Array<CharArray>) {
 
-        private val sides: Set<String> = Direction.values().map { sideFacing(it) }.toSet()
+        private val sides: Set<String> = Direction.entries.map { sideFacing(it) }.toSet()
         private val sidesReversed = sides.map { it.reversed() }.toSet()
 
         override fun toString(): String = "Tile($id)"

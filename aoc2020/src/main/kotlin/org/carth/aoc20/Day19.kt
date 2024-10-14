@@ -27,12 +27,11 @@ class Day19(input: String) : Puzzle<Int, Int>() {
     }
 
     class Rule(line: String) {
-        val id: Int
+        val id: Int = line.substringBefore(":").toInt()
         private val value: Char?
         private val rules: List<List<Int>>?
 
         init {
-            id = line.substringBefore(":").toInt()
             val v = line.substringAfter(": ")
             if (v.startsWith("\"")) {
                 value = v[1]

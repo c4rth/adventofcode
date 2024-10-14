@@ -1,8 +1,10 @@
 package org.carth.aoc22
 
 import org.carth.common.DayTests
-import org.junit.jupiter.api.*
+import org.carth.common.Part
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.Test
 
 class Day15Tests : DayTests<Day15>(Day15::class) {
 

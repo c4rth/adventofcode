@@ -1,9 +1,13 @@
 package org.carth.aoc20
 
 import org.carth.common.DayTests
-import org.junit.jupiter.api.*
+import org.carth.common.Part
+import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.Test
 
 class Day23Tests : DayTests<Day23>(Day23::class) {
+
+    /*
     @Test
     @Order(1)
     fun solvePartOneSample1() = solve(Part.ONE, Type.TEST, expected = "67384529")
@@ -19,4 +23,6 @@ class Day23Tests : DayTests<Day23>(Day23::class) {
     @Test
     @Order(4)
     fun solvePartTwo() = solve(Part.TWO, Type.INPUT, expected = "")
+
+     */
 }

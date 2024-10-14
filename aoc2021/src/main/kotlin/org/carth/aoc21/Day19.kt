@@ -1,7 +1,7 @@
 package org.carth.aoc21
 
-import org.carth.common.Puzzle
 import org.carth.common.Point3d
+import org.carth.common.Puzzle
 
 // https://github.com/ClouddJR/AdventOfCode2021/blob/master/src/main/kotlin/com/clouddjr/advent2021/Day19.kt
 

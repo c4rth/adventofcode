@@ -2,7 +2,6 @@ package org.carth.aoc20
 
 import org.carth.common.Point2d
 import org.carth.common.Puzzle
-import org.carth.common.extensions.get
 
 
 class Day03(input: String) : Puzzle<Int, Int>() {
@@ -25,7 +24,7 @@ class Day03(input: String) : Puzzle<Int, Int>() {
         val w = data[0].length
         var trees = 0
         while (p.y < data.size) {
-            if (data[p] == '#') trees++
+            if (data[p.y][p.x] == '#') trees++
             p += slope
             p = Point2d(p.x.mod(w), p.y)
         }

@@ -47,10 +47,10 @@ class Day23(input: String) : Puzzle<Int, Int>() {
     }
 
     private fun getPossibleMove(elf: Point2d): Point2d? {
-        val hasNeighbors = elf.adjacents().any { it in elves }
+        val hasNeighbors = elf.adjacent().any { it in elves }
         if (hasNeighbors)
             directions.forEach { dir ->
-                val adjacentPoints = adjacents[dir]!!
+                val adjacentPoints = adjacent[dir]!!
                 val noNeighborFound = adjacentPoints
                     .map { elf + it }
                     .none { it in elves }
@@ -87,7 +87,7 @@ class Day23(input: String) : Puzzle<Int, Int>() {
     }
 
     companion object {
-        private val adjacents = mutableMapOf(
+        private val adjacent = mutableMapOf(
             Direction.N to listOf(Point2d.NW, Point2d.N, Point2d.NE),
             Direction.E to listOf(Point2d.NE, Point2d.E, Point2d.SE),
             Direction.S to listOf(Point2d.SW, Point2d.S, Point2d.SE),

@@ -28,19 +28,19 @@ class Day18(input: String) : Puzzle<Int, Int>() {
         if (cur.x !in xRange || cur.y !in yRange || cur.z !in zRange) {
             trapped.removeAll(seen + cur)
         } else {
-            cur.directAdjacents()
+            cur.directAdjacent()
                 .filter { it !in cubes && it !in seen }
                 .forEach { return removeTrapped(start, it, seen + cur) }
         }
     }
 
     override fun solvePartOne(): Int {
-        return cubes.sumOf { cube -> cube.directAdjacents().count { adjacentCube -> adjacentCube !in cubes } }
+        return cubes.sumOf { cube -> cube.directAdjacent().count { adjacentCube -> adjacentCube !in cubes } }
     }
 
     override fun solvePartTwo(): Int {
         allPoint3ds.forEach { removeTrapped(it) }
-        return cubes.sumOf { cube -> cube.directAdjacents().count { it !in cubes && it !in trapped } }
+        return cubes.sumOf { cube -> cube.directAdjacent().count { it !in cubes && it !in trapped } }
 
     }
 
