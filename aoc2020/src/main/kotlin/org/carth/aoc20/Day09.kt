@@ -1,4 +1,4 @@
-package org.carth.aoc20
+package org.carth.aoc2020
 
 import org.carth.common.Puzzle
 

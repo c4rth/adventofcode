@@ -1,7 +1,6 @@
-package org.carth.aoc20
+package org.carth.aoc2020
 
 import org.carth.common.DayTests
-import org.carth.common.Part
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test

@@ -15,8 +15,8 @@ abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
 
     private val logger = KotlinLogging.logger {}
 
-    enum class Type {
-        TEST, INPUT
+    enum class Type(val text: String) {
+        TEST("test"), INPUT("input")
     }
 
     private val day: String = this.javaClass.simpleName.take(5).lowercase(Locale.getDefault())
@@ -26,17 +26,11 @@ abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
             ?: throw IllegalArgumentException("Cannot find Resource: $this")
 
     private fun getFilename(type: Type, suffix: String = ""): String =
-        "$day/${type.toString().lowercase(Locale.getDefault())}$suffix.txt"
+        "$day/${type.text}$suffix.txt"
 
     fun readInput(type: Type, suffix: String = ""): String = File(getFilename(type, suffix).toURI()).readText()
 
     private fun getInstance(data: String): T = clazz.primaryConstructor!!.call(data)
-
-    private fun functionNameWithStackWalker(): String? {
-        return StackWalker.getInstance().walk { frames ->
-            frames.filter { it.methodName.startsWith("solvePart") }.findFirst().map { it.methodName }.orElse(null)
-        }
-    }
 
     fun solve(part: Part, type: Type, suffix: String = "", args: List<Any> = emptyList(), expected: Any) {
         val input = readInput(type, suffix)
@@ -48,8 +42,20 @@ abstract class DayTests<T : Puzzle<*, *>>(private val clazz: KClass<T>) {
             else
                 instance.solvePartTwo()
         }
-        logger.info { "Part [$part] : ${functionNameWithStackWalker()} - ${durationExecution.inWholeMilliseconds} ms." }
+        logger.info { "Part [${part.text}] : type [${type.text}] - ${durationExecution.inWholeMilliseconds} ms." }
         assertEquals(expected, answer)
     }
+
+    fun solvePartOneSample(expected: Any) = solve(Part.ONE, Type.TEST, expected = expected)
+    fun solvePartOneSample(fileSuffix: String = "", expected: Any) =
+        solve(Part.ONE, Type.TEST, suffix = fileSuffix, expected = expected)
+
+    fun solvePartOne(expected: Any) = solve(Part.ONE, Type.INPUT, expected = expected)
+
+    fun solvePartTwoSample(expected: Any) = solve(Part.TWO, Type.TEST, expected = expected)
+    fun solvePartTwoSample(fileSuffix: String = "", expected: Any) =
+        solve(Part.TWO, Type.TEST, suffix = fileSuffix, expected = expected)
+
+    fun solvePartTwo(expected: Any) = solve(Part.TWO, Type.INPUT, expected = expected)
 
 }

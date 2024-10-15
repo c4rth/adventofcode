@@ -2,8 +2,8 @@ package org.carth.common
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 
-enum class Part {
-    ONE, TWO
+enum class Part(val text: String) {
+    ONE("one"), TWO("two")
 }
 
 abstract class Puzzle<T1, T2> {

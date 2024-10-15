@@ -1,4 +1,4 @@
-package org.carth.aoc22
+package org.carth.aoc2020
 
 import org.carth.common.Point2d
 import org.carth.common.Puzzle
