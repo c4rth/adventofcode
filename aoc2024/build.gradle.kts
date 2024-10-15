@@ -6,5 +6,4 @@ dependencies {
     implementation("org.apache.commons:commons-geometry-core:1.0")
     implementation("org.apache.commons:commons-geometry-euclidean:1.0")
     implementation("tools.aqua:z3-turnkey:4.13.0.1")
-    testImplementation(project(":common-tests"))
 }

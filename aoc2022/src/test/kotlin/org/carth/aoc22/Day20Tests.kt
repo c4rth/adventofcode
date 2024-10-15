@@ -1,7 +1,7 @@
 package org.carth.aoc22
 
 import org.carth.common.DayTests
-import org.carth.common.Part
+import org.carth.common.Puzzle.Part
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 

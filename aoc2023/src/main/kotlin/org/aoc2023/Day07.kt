@@ -1,6 +1,5 @@
 package org.carth.aoc2023
 
-import org.carth.common.Part
 import org.carth.common.Puzzle
 
 

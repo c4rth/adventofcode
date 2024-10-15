@@ -1,6 +1,7 @@
 package org.carth.common
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import org.carth.common.Puzzle.Part
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.TestMethodOrder
 import java.io.File
