@@ -2,7 +2,7 @@ package org.carth.aoc2023
 
 import org.carth.common.Puzzle
 
-class Day19(private val input: String) : Puzzle<Long, Long>() {
+class Day19(input: String) : Puzzle<Long, Long>() {
 
     private val data = input.split(System.lineSeparator() + System.lineSeparator())
 
@@ -27,9 +27,6 @@ class Day19(private val input: String) : Puzzle<Long, Long>() {
         })
     }
 
-    data class Cond(val v: Char, val op: Char, val w: Int)
-    data class RuleX(val cond: Cond?, val dest: String)
-    data class WF(val rules: List<RuleX>)
     data class Part(val vs: Map<Char, Int>) {
         operator fun get(v: Char): Int = vs[v]!!
     }

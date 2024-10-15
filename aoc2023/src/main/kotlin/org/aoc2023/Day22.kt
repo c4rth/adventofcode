@@ -57,5 +57,4 @@ class Day22(input: String) : Puzzle<Int, Int>() {
         return total.sum()
     }
 
-    data class Brick(val from: Point3d, val to: Point3d)
 }

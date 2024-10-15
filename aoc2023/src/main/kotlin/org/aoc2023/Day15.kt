@@ -37,10 +37,6 @@ class Day15(input: String) : Puzzle<Long, Long>() {
         return total
     }
 
-    private fun hash(str: String): Int {
-        return str.map { it.code }.fold(0) { acc, i -> ((acc + i) * 17) % 256 }
-    }
-
     class Step(private val str: String) {
         val label: String
         val remove: Boolean
