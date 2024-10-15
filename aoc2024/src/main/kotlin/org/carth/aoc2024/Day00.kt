@@ -1,7 +1,6 @@
 package org.carth.aoc2024
 
-import org.carth.common.Puzzle2
-import org.carth.common.PuzzlePart.*
+import org.carth.common.*
 
 class Day00() : Puzzle2<Int, Int>() {
 
@@ -11,9 +10,11 @@ class Day00() : Puzzle2<Int, Int>() {
 
 }
 
-fun main() = Day00().solve( listOf(
-    Part1Sample(expected = 0),
-    Part1(expected = 0),
-    Part2Sample(expected = 0),
-    Part2(expected = 0)
-))
+fun main() = Day00().solve(
+    listOf(
+        sample1(expected = 0),
+        puzzle1(expected = 0),
+        sample2(expected = 0),
+        puzzle2(expected = 0)
+    )
+)

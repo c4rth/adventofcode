@@ -1,14 +1,14 @@
 package org.carth.aoc2024
 
-import org.carth.common.Puzzle2
-import org.carth.common.PuzzlePart.*
+import org.carth.common.*
 
 fun main() = Day01().solve(
     listOf(
-        Part1Sample(expected = 142),
-        Part1(expected = 55621),
-        Part2Sample(suffix = "2", expected = 281),
-        Part2(expected = 53592)
+        sample1(expected = 142),
+        puzzle1(expected = 55621),
+        sample2(expected = 142),
+        sample2(suffix = "2", expected = 281),
+        puzzle2(expected = 53592)
     )
 )
 

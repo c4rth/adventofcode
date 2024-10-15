@@ -7,17 +7,18 @@ import java.io.File
 import java.util.*
 import kotlin.time.measureTimedValue
 
-sealed class PuzzlePart(
+class PuzzlePart(
     val part: Part,
     val type: Type,
     val suffix: String?,
     val expected: Any
-) {
-    class Part1Sample(suffix: String? = null, expected: Any) : PuzzlePart(Part.ONE, Type.SAMPLE, suffix, expected)
-    class Part1(suffix: String? = null, expected: Any) : PuzzlePart(Part.ONE, Type.PUZZLE, suffix, expected)
-    class Part2Sample(suffix: String? = null, expected: Any) : PuzzlePart(Part.TWO, Type.SAMPLE, suffix, expected)
-    class Part2(suffix: String? = null, expected: Any) : PuzzlePart(Part.TWO, Type.PUZZLE, suffix, expected)
-}
+)
+
+
+fun sample1(suffix: String? = null, expected: Any) = PuzzlePart(Part.ONE, Type.SAMPLE, suffix, expected)
+fun puzzle1(suffix: String? = null, expected: Any) = PuzzlePart(Part.ONE, Type.PUZZLE, suffix, expected)
+fun sample2(suffix: String? = null, expected: Any) = PuzzlePart(Part.TWO, Type.SAMPLE, suffix, expected)
+fun puzzle2(suffix: String? = null, expected: Any) = PuzzlePart(Part.TWO, Type.PUZZLE, suffix, expected)
 
 abstract class Puzzle2<T1, T2>() {
 
@@ -30,25 +31,30 @@ abstract class Puzzle2<T1, T2>() {
     }
 
     protected val logger = KotlinLogging.logger {}
+
     protected lateinit var input: String
 
-    private fun readInput(type: Type, suffix: String?): String {
-        val day: String = this.javaClass.simpleName.take(5).lowercase(Locale.getDefault())
-        val fileSuffix = if (suffix != null) "-$suffix" else ""
-        return File("$day/${type.toString().lowercase(Locale.getDefault())}${fileSuffix}.txt".toURI()).readText()
+    private fun fileSuffix(suffix: String?) = if (suffix != null) "-$suffix" else ""
+
+    private fun readInput(filename: String): String {
+        return File(filename.toURI()).readText()
     }
 
     private fun solve(part: Part, type: Type, suffix: String?, expected: Any) {
-        this.input = readInput(type, suffix)
+        val day: String = this.javaClass.simpleName.take(5)
+        val filename = "$day/${type.toString().lowercase(Locale.getDefault())}${fileSuffix(suffix)}.txt"
+        this.input = readInput(filename)
         val (answer, durationExecution) = measureTimedValue {
             if (part == Part.ONE)
                 solvePart1()
             else
                 solvePart2()
         }
-        logger.info { "Part [${part}] : type [${type.text}] - ${durationExecution.inWholeMilliseconds} ms." }
-        if (answer != expected) {
-            throw IllegalArgumentException("Wrong answer: $answer, expected: $expected")
+        val log = "${type.text} / ${part.toString().lowercase()} - file [$filename] :"
+        if (answer == expected) {
+            logger.info { "$log ${durationExecution.inWholeMilliseconds} ms." }
+        } else {
+            logger.error { "$log Wrong answer: $answer, expected: $expected" }
         }
     }
 
