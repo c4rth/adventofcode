@@ -1,24 +1,21 @@
 package org.carth.aoc2024
 
-import org.carth.common.*
+import org.carth.common.Puzzle2
 
-fun main() = Day01().solve(
-    listOf(
-        sample1(expected = 142),
-        puzzle1(expected = 55621),
-        sample2(expected = 142),
-        sample2(suffix = "2", expected = 281),
-        puzzle2(expected = 53592)
-    )
-)
+fun main() = Day01().solve()
 
-class Day01() : Puzzle2<Int, Int>() {
+class Day01() : Puzzle2() {
 
     private val numbers = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
 
-    override fun solvePart1() = getIntValues().sum()
+    @Sample(expected = "142")
+    @Puzzle(expected = "55621")
+    override fun solvePart1() = getIntValues().sum().toString()
 
-    override fun solvePart2() = getStringValues().sum()
+    @Sample(expected = "142")
+    @Sample(suffix="2", expected = "281")
+    @Puzzle(expected = "53592")
+    override fun solvePart2() = getStringValues().sum().toString()
 
     private fun getIntValues(): List<Int> {
         return input.split(System.lineSeparator())
