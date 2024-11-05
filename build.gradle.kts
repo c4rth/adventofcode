@@ -8,6 +8,8 @@ allprojects {
     }
 }
 
+group = "org.c4rth"
+
 subprojects {
     apply(plugin = "kotlin")
     tasks {

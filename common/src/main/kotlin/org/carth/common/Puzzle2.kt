@@ -6,7 +6,7 @@ import kotlin.reflect.KFunction
 import kotlin.reflect.full.declaredMemberFunctions
 import kotlin.time.measureTimedValue
 
-abstract class Puzzle2() {
+abstract class Puzzle2 {
 
     @Target(AnnotationTarget.FUNCTION)
     @Retention(AnnotationRetention.RUNTIME)
@@ -18,6 +18,10 @@ abstract class Puzzle2() {
     @Repeatable
     annotation class Puzzle(val suffix: String = "", val expected: String)
 
+    enum class Part(val text: String) {
+        ONE("one"), TWO("two"), ALL("all")
+    }
+
     enum class Type(val text: String) {
         SAMPLE("sample"), PUZZLE("puzzle")
     }
@@ -26,8 +30,13 @@ abstract class Puzzle2() {
 
     protected lateinit var input: String
 
-    fun solve() {
-        this::class.declaredMemberFunctions.filter { it.name in listOf("solvePart1", "solvePart2") }.forEach { func ->
+    fun solve(part: Part = Part.ALL) {
+        val methods = when (part) {
+            Part.ONE -> listOf("solvePart1")
+            Part.TWO -> listOf("solvePart2")
+            Part.ALL -> listOf("solvePart1", "solvePart2")
+        }
+        this::class.declaredMemberFunctions.filter { it.name in methods }.forEach { func ->
             func.annotations.filter { it is Sample || it is Puzzle }.forEach { ann ->
                 when (ann) {
                     is Sample -> solveInternal(func, Type.SAMPLE, ann.suffix, ann.expected)
@@ -39,7 +48,7 @@ abstract class Puzzle2() {
 
     private fun solveInternal(t: KFunction<*>, type: Type, suffix: String, expected: String) {
         val fileSuffix = if (suffix.isEmpty()) "" else "-$suffix"
-        val filename = "${this.javaClass.simpleName}/${type.text}${fileSuffix}.txt"
+        val filename = "${this.javaClass.simpleName.lowercase()}/${type.text}${fileSuffix}.txt"
         this.input = File(filename.toURI()).readText()
         val (answer, durationExecution) = measureTimedValue {
             t.call(this)

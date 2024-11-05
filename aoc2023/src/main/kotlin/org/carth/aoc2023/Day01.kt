@@ -1,11 +1,10 @@
-package org.carth.aoc2024
+package org.carth.aoc2023
 
 import org.carth.common.Puzzle2
 
 fun main() = Day01().solve()
 
 class Day01 : Puzzle2() {
-
     private val numbers = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
 
     @Sample(expected = "142")
@@ -13,7 +12,7 @@ class Day01 : Puzzle2() {
     override fun solvePart1() = getIntValues().sum().toString()
 
     @Sample(expected = "142")
-    @Sample(suffix="2", expected = "281")
+    @Sample(suffix = "2" ,expected = "281")
     @Puzzle(expected = "53592")
     override fun solvePart2() = getStringValues().sum().toString()
 
