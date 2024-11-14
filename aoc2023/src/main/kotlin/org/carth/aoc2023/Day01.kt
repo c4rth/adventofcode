@@ -1,29 +1,22 @@
 package org.carth.aoc2023
 
-import org.carth.common.Puzzle2
+import org.carth.common.Puzzle
 
-fun main() = Day01().solve()
-
-class Day01 : Puzzle2() {
+class Day01(private val data: String) : Puzzle<Int, Int>() {
     private val numbers = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
 
-    @Sample(expected = "142")
-    @Puzzle(expected = "55621")
-    override fun solvePart1() = getIntValues().sum().toString()
+    override fun solvePartOne() = getIntValues().sum()
 
-    @Sample(expected = "142")
-    @Sample(suffix = "2" ,expected = "281")
-    @Puzzle(expected = "53592")
-    override fun solvePart2() = getStringValues().sum().toString()
+    override fun solvePartTwo() = getStringValues().sum()
 
     private fun getIntValues(): List<Int> {
-        return input.split(System.lineSeparator())
+        return data.split(System.lineSeparator())
             .map { line -> line[line.indexOfFirst { c -> c.isDigit() }].toString() + line[line.indexOfLast { c -> c.isDigit() }] }
             .map { it.toInt() }
     }
 
     private fun getStringValues(): List<Int> {
-        return input.split(System.lineSeparator())
+        return data.split(System.lineSeparator())
             .map { getFirstNumber(it) + getLastNumber(it) }
             .map { it.toInt() }
     }
