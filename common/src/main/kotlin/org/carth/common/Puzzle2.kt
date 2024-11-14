@@ -6,7 +6,7 @@ import kotlin.reflect.KFunction
 import kotlin.reflect.full.declaredMemberFunctions
 import kotlin.time.measureTimedValue
 
-abstract class Puzzle2 {
+abstract class Puzzle2<T1, T2> {
 
     @Target(AnnotationTarget.FUNCTION)
     @Retention(AnnotationRetention.RUNTIME)
@@ -28,8 +28,6 @@ abstract class Puzzle2 {
 
     protected val logger = KotlinLogging.logger {}
 
-    protected lateinit var input: String
-
     fun solve(part: Part = Part.ALL) {
         val methods = when (part) {
             Part.ONE -> listOf("solvePart1")
@@ -49,20 +47,21 @@ abstract class Puzzle2 {
     private fun solveInternal(t: KFunction<*>, type: Type, suffix: String, expected: String) {
         val fileSuffix = if (suffix.isEmpty()) "" else "-$suffix"
         val filename = "${this.javaClass.simpleName.lowercase()}/${type.text}${fileSuffix}.txt"
-        this.input = File(filename.toURI()).readText()
+        val input = File(filename.toURI()).readText()
         val (answer, durationExecution) = measureTimedValue {
-            t.call(this)
+            t.call(this, input)
         }
         val log = "${type.text} / ${t.name} - file '$filename' :"
-        if (answer == expected) {
+        if (answer.toString() == expected) {
             logger.info { "$log ${durationExecution.inWholeMilliseconds} ms." }
         } else {
             logger.error { "$log Wrong answer: $answer, expected: $expected" }
         }
     }
 
-    abstract fun solvePart1(): String
-    abstract fun solvePart2(): String
+    abstract fun solvePart1(input: String): T1
+    abstract fun solvePart2(input: String): T2
+
 }
 
 private fun String.toURI() = object {}.javaClass.classLoader.getResource(this)?.toURI()

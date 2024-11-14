@@ -4,26 +4,26 @@ import org.carth.common.Puzzle2
 
 fun main() = Day01().solve()
 
-class Day01 : Puzzle2() {
+class Day01 : Puzzle2<Int, Int>() {
 
     private val numbers = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
 
     @Sample(expected = "142")
     @Puzzle(expected = "55621")
-    override fun solvePart1() = getIntValues().sum().toString()
+    override fun solvePart1(input: String) = getIntValues(input).sum()
 
     @Sample(expected = "142")
     @Sample(suffix="2", expected = "281")
     @Puzzle(expected = "53592")
-    override fun solvePart2() = getStringValues().sum().toString()
+    override fun solvePart2(input: String) = getStringValues(input).sum()
 
-    private fun getIntValues(): List<Int> {
+    private fun getIntValues(input: String): List<Int> {
         return input.split(System.lineSeparator())
             .map { line -> line[line.indexOfFirst { c -> c.isDigit() }].toString() + line[line.indexOfLast { c -> c.isDigit() }] }
             .map { it.toInt() }
     }
 
-    private fun getStringValues(): List<Int> {
+    private fun getStringValues(input: String): List<Int> {
         return input.split(System.lineSeparator())
             .map { getFirstNumber(it) + getLastNumber(it) }
             .map { it.toInt() }
