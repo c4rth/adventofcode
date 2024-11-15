@@ -1,24 +1,23 @@
 package org.carth.aoc2024
 
-import org.carth.common.GridChar
-import org.carth.common.Point2d
-import org.carth.common.Puzzle2
+import org.carth.aoc.Data
+import org.carth.utils.GridChar
+import org.carth.utils.Point2d
+import org.carth.aoc.Puzzle
 
 fun main() = Day03().solve()
 
-class Day03 : Puzzle2<Long, Long>() {
-
-    private lateinit var grid: GridChar
+class Day03 : Puzzle<Long, Long>() {
 
     @Sample(expected = "4361")
     @Puzzle(expected = "543867")
-    override fun solvePart1(input: String): Long {
-        grid = GridChar(input)
+    override fun solvePart1(data: Data): Long {
+        val grid = GridChar(data)
         val pointNumbers = emptyMap<Point2d, Long>().toMutableMap()
         grid.lines.forEachIndexed { y, line ->
             line.forEachIndexed { x, char ->
                 if (char != '.' && !char.isDigit()) {
-                    pointNumbers += getAdjacentNumbers(x, y)
+                    pointNumbers += grid.getAdjacentNumbers(x, y)
                 }
             }
         }
@@ -27,13 +26,13 @@ class Day03 : Puzzle2<Long, Long>() {
 
     @Sample(expected = "467835")
     @Puzzle(expected = "79613331")
-    override fun solvePart2(input: String): Long {
-        grid = GridChar(input)
+    override fun solvePart2(data: Data): Long {
+        val grid = GridChar(data)
         var total = 0L
         grid.lines.forEachIndexed { y, line ->
             line.forEachIndexed { x, char ->
                 if (char == '*') {
-                    getAdjacentNumbers(x, y).let { pointNumbers ->
+                    grid.getAdjacentNumbers(x, y).let { pointNumbers ->
                         if (pointNumbers.size == 2) {
                             total += pointNumbers.values.reduce { acc, value -> acc * value }
                         }
@@ -44,18 +43,18 @@ class Day03 : Puzzle2<Long, Long>() {
         return total
     }
 
-    private fun getAdjacentNumbers(x: Int, y: Int): Map<Point2d, Long> {
+    private fun GridChar.getAdjacentNumbers(x: Int, y: Int): Map<Point2d, Long> {
         val pointNumbers = mutableMapOf<Point2d, Long>()
-        grid.adjacent(x, y).forEach { p ->
-            if (grid[p].isDigit()) {
+        this.adjacent(x, y).forEach { p ->
+            if (this[p].isDigit()) {
                 getPointAndNumber(p).let { (point, value) -> pointNumbers[point] = value }
             }
         }
         return pointNumbers
     }
 
-    private fun getPointAndNumber(p: Point2d): Pair<Point2d, Long> {
-        val line = " " + grid[p.y].joinToString("") + " "
+    private fun GridChar.getPointAndNumber(p: Point2d): Pair<Point2d, Long> {
+        val line = " " + this[p.y].joinToString("") + " "
         var startC = p.x + 1
         while (line[startC - 1].isDigit()) startC -= 1
         var endC = p.x + 2

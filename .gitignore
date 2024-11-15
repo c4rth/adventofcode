@@ -2,3 +2,4 @@
 !.idea/fileTemplates/**
 .idea
 build
+.kotlin

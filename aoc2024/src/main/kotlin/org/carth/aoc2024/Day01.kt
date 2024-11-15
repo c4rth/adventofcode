@@ -1,30 +1,31 @@
 package org.carth.aoc2024
 
-import org.carth.common.Puzzle2
+import org.carth.aoc.Data
+import org.carth.aoc.Puzzle
 
 fun main() = Day01().solve()
 
-class Day01 : Puzzle2<Int, Int>() {
+class Day01 : Puzzle<Int, Int>() {
 
     private val numbers = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
 
     @Sample(expected = "142")
     @Puzzle(expected = "55621")
-    override fun solvePart1(input: String) = getIntValues(input).sum()
+    override fun solvePart1(data: Data) = getIntValues(data).sum()
 
     @Sample(expected = "142")
     @Sample(suffix="2", expected = "281")
     @Puzzle(expected = "53592")
-    override fun solvePart2(input: String) = getStringValues(input).sum()
+    override fun solvePart2(data: Data) = getStringValues(data).sum()
 
-    private fun getIntValues(input: String): List<Int> {
-        return input.split(System.lineSeparator())
+    private fun getIntValues(data: Data): List<Int> {
+        return data.lines()
             .map { line -> line[line.indexOfFirst { c -> c.isDigit() }].toString() + line[line.indexOfLast { c -> c.isDigit() }] }
             .map { it.toInt() }
     }
 
-    private fun getStringValues(input: String): List<Int> {
-        return input.split(System.lineSeparator())
+    private fun getStringValues(data: Data): List<Int> {
+        return data.lines()
             .map { getFirstNumber(it) + getLastNumber(it) }
             .map { it.toInt() }
     }
