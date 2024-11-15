@@ -3,9 +3,9 @@ package org.carth.aoc2024
 import org.carth.aoc.Data
 import org.carth.aoc.Puzzle
 
-fun main() = Day00().solve()
+fun main() = Day00.solve()
 
-class Day00 : Puzzle<Int, Int>() {
+object Day00 : Puzzle() {
 
     @Sample(expected = "0")
     @Puzzle(expected = "0")

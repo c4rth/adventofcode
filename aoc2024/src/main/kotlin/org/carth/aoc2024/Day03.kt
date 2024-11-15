@@ -5,9 +5,9 @@ import org.carth.utils.GridChar
 import org.carth.utils.Point2d
 import org.carth.aoc.Puzzle
 
-fun main() = Day03().solve()
+fun main() = Day03.solve()
 
-class Day03 : Puzzle<Long, Long>() {
+object Day03 : Puzzle() {
 
     @Sample(expected = "4361")
     @Puzzle(expected = "543867")

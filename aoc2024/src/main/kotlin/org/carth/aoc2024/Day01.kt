@@ -3,9 +3,9 @@ package org.carth.aoc2024
 import org.carth.aoc.Data
 import org.carth.aoc.Puzzle
 
-fun main() = Day01().solve()
+fun main() = Day01.solve()
 
-class Day01 : Puzzle<Int, Int>() {
+object Day01 : Puzzle() {
 
     private val numbers = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
 

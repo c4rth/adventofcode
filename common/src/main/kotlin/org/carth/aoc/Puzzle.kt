@@ -6,7 +6,7 @@ import kotlin.reflect.KFunction
 import kotlin.reflect.full.declaredMemberFunctions
 import kotlin.time.measureTimedValue
 
-abstract class Puzzle<T1, T2> {
+abstract class Puzzle {
 
     init {
         System.setProperty("slf4j.internal.verbosity", "WARN")
@@ -52,12 +52,10 @@ abstract class Puzzle<T1, T2> {
         }
     }
 
-    abstract fun solvePart1(data: Data): T1
+    abstract fun solvePart1(data: Data): Any
 
-    abstract fun solvePart2(data: Data): T2
-
-    private fun String.toURI() = object {}.javaClass.classLoader.getResource(this)?.toURI()
-        ?: throw IllegalArgumentException("Cannot find Resource: $this")
+    abstract fun solvePart2(data: Data): Any
 }
+
 
 
